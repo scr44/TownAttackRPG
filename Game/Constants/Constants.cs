@@ -49,6 +49,14 @@ namespace Game.Constants
         public static readonly string SPRegen = "Base SP Regen";
     }
 
+    public static class BaseStat
+    {
+        public static readonly string HP = "Base HP";
+        public static readonly string SP = "Base SP";
+        public static readonly string HPRegen = "Base HP Regen";
+        public static readonly string SPRegen = "Base SP Regen";
+    }
+
     public static class Slot
     {
         public static readonly string Body = "Body";

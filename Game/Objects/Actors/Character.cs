@@ -1,4 +1,4 @@
-﻿using Game.Constants;
+using Game.Constants;
 using Game.Objects.Items;
 using Game.Objects.Professions;
 using System;
