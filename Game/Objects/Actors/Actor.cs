@@ -6,43 +6,62 @@ using System.Text;
 
 namespace Game.Objects.Actors
 {
-    abstract class Actor : Health, Stamina
+    public abstract class Actor : IHealth, IStamina
     {
-        public Actor() { }
-
-        public string Name { get; private set; }
-        public string Gender { get; private set; } // TODO: add pronouns for string interpolation
-        public string Race { get; private set; }
-
-        public Dictionary<string,int> Modifiers
+        public Actor(string name, string gender, string race)
         {
-            get
-            {
-                return new Dictionary<string, int>()
-                {
-                    { Stat.STR, 5 },
-                    { Stat.DEX, 5 },
-                    { Stat.SKL, 5 },
-                    { Stat.APT, 5 },
-                    { Stat.FOR, 5 },
-                    { Stat.CHA, 5 },
-
-                    { Stat.Medicine, 0 },
-                    { Stat.Explosives, 0 },
-                    { Stat.Veterancy, 0 },
-                    { Stat.Bestiary, 0 },
-                    { Stat.Engineering, 0 },
-                    { Stat.History, 0 }
-                };
-            }
+            Name = name;
+            Gender = gender;
+            Race = race;
         }
+
+        public string Name { get; protected set; }
+        public string Gender { get; protected set; } // TODO: add pronouns for string interpolation
+        public string Race { get; protected set; }
+
+        public Dictionary<string, int> StatModifiers { get; set; } = new Dictionary<string, int>()
+        {
+            { Stat.STR, 0 },
+            { Stat.DEX, 0 },
+            { Stat.SKL, 0 },
+            { Stat.APT, 0 },
+            { Stat.FOR, 0 },
+            { Stat.CHA, 0 },
+
+            { Stat.Medicine, 0 },
+            { Stat.Explosives, 0 },
+            { Stat.Veterancy, 0 },
+            { Stat.Bestiary, 0 },
+            { Stat.Engineering, 0 },
+            { Stat.History, 0 },
+
+            
+        };
+
+        public Dictionary<string, double> AttackModifiers { get; set; } = new Dictionary<string, double>()
+        {
+            { DmgType.Slashing, 1 },
+            { DmgType.Piercing, 1 },
+            { DmgType.Crushing, 1 },
+            { DmgType.Fire, 1 },
+            { DmgType.Poison, 1 }
+        };
+
+        public Dictionary<string, double> DefenseModifiers { get; set; } = new Dictionary<string, double>()
+        {
+            { DmgType.Slashing, 1 },
+            { DmgType.Piercing, 1 },
+            { DmgType.Crushing, 1 },
+            { DmgType.Fire, 1 },
+            { DmgType.Poison, 1 }
+        };
 
         #region Health
         public int HP { get; set; }
-        public int MaxHP { get; set; }
-        public double PercentHP => Math.Round((((double)HP / MaxHP * 100)));
+        public int MaxHP => BaseHP + StatModifiers[Stat.MaxHP];
+        public double PercentHP => Math.Round(((HP / (double)MaxHP * 100)));
         public int BaseHP { get; set; }
-        public int BaseHPRegen { get; set; }
+        public int BaseHealthRegen { get; set; }
         public bool IsAlive { get; set; } = true;
         public void AdjustBaseHP(int points)
         {
@@ -76,10 +95,10 @@ namespace Game.Objects.Actors
 
         #region Stamina
         public int SP { get; set; }
-        public int MaxSP { get; }
-        public double PercentSP { get; }
+        public int MaxSP => BaseSP + StatModifiers[Stat.MaxSP];
+        public double PercentSP => Math.Round((SP / (double)MaxSP), 2) * 100;
         public int BaseSP { get; set; }
-        public int BaseSPRegen { get; set; }
+        public int BaseStaminaRegen { get; set; }
         public void AdjustSP(double points)
         {
             throw new NotImplementedException();
