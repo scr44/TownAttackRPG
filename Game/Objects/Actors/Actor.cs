@@ -19,7 +19,7 @@ namespace Game.Objects.Actors
         public string Gender { get; protected set; } // TODO: add pronouns for string interpolation
         public string Race { get; protected set; }
 
-        public Dictionary<string, int> StatModifiers { get; set; } = new Dictionary<string, int>()
+        public Dictionary<string, int> EffectModifiers { get; set; } = new Dictionary<string, int>()
         {
             { Stat.STR, 0 },
             { Stat.DEX, 0 },
@@ -38,7 +38,7 @@ namespace Game.Objects.Actors
             
         };
 
-        public Dictionary<string, double> AttackModifiers { get; set; } = new Dictionary<string, double>()
+        public Dictionary<string, double> OffenseModifiers { get; set; } = new Dictionary<string, double>()
         {
             { DmgType.Slashing, 1 },
             { DmgType.Piercing, 1 },
@@ -55,6 +55,8 @@ namespace Game.Objects.Actors
             { DmgType.Fire, 1 },
             { DmgType.Poison, 1 }
         };
+
+        public Dictionary<string, int> StatModifiers { get; set; }
 
         #region Health
         public int HP { get; set; }

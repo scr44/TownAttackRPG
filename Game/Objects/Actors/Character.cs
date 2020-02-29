@@ -4,10 +4,12 @@ using Game.Objects.Professions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using Game.Objects.Items.InventoryAndEquipment;
 
 namespace Game.Objects.Actors
 {
-    public class Character : Actor, IInventory, IEquipment
+    public class Character : Actor, IChangeEquipment
     {
         public Character(string name, string gender, string race, string profession)
             : base(name, gender, race)
@@ -17,8 +19,8 @@ namespace Game.Objects.Actors
             {
                 Profession.SwapDescriptions();
             }
-            Attributes = new Attributes() { Base = Profession.StartingAttributes };
-            Talents = new Talents() { Base = Profession.StartingTalents };
+            BaseAttributes = new Attributes() { Base = Profession.StartingAttributes };
+            BaseTalents = new Talents() { Base = Profession.StartingTalents };
             BaseHP = (int)Profession.StartingHealthAndStamina[BaseStat.HP];
             BaseSP = (int)Profession.StartingHealthAndStamina[BaseStat.SP];
 
@@ -29,34 +31,52 @@ namespace Game.Objects.Actors
         }
 
         public Profession Profession { get; set; }
-        public Attributes Attributes { get; set; }
-        public Talents Talents { get; set; }
+        public Attributes BaseAttributes { get; set; }
+        public Talents BaseTalents { get; set; }
 
-        #region Inventory
-        List<Item> IInventory.ItemList { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public void AddItem(Item item)
+        public Dictionary<string, int> Attributes
         {
-            throw new NotImplementedException();
+            get
+            {
+                Dictionary<string, int> ModifiedAttributes = BaseAttributes.Base;
+                foreach (var kvp in ModifiedAttributes)
+                {
+                    ModifiedAttributes[kvp.Key] += (int)EquipmentModifiers[kvp.Key] + (int)EffectModifiers[kvp.Key];
+                }
+                return ModifiedAttributes;
+            }
         }
-        public void RemoveItem(Item item)
+        public Dictionary<string, int> Talents
         {
-            throw new NotImplementedException();
+            get
+            {
+                Dictionary<string, int> ModifiedTalents = BaseTalents.Base;
+                foreach (var kvp in ModifiedTalents)
+                {
+                    ModifiedTalents[kvp.Key] += (int)EquipmentModifiers[kvp.Key] + (int)EffectModifiers[kvp.Key];
+                }
+                return ModifiedTalents;
+            }
         }
-        #endregion
+
+        public Inventory Inventory { get; protected set; }
 
         #region Equipment
-        Dictionary<string, EquipmentItem> IEquipment.Slots { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Dictionary<string, double> EquipmentModifiers { get; } // TODO: get modifiers from equipment
-        bool IEquipment.TwoHanding { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        void IEquipment.EquipItem(EquipmentItem item)
+        public Dictionary<string, EquipmentItem> Slots { get; private set; }
+        bool IsTwoHanding => Slots[Slot.OffHand].Name == EquipmentItems.Hands.TwoHanding;
+        Dictionary<string, double> EquipmentModifiers { get; set; }
+        void IChangeEquipment.EquipItem(string slot, EquipmentItem item)
+        {
+            var oldItem = Slots[slot];
+            Slots[slot] = item;
+            Inventory.RemoveItem((Item)item);
+            Inventory.AddItem(oldItem);
+        }
+        void IChangeEquipment.ToggleTwoHanding()
         {
             throw new NotImplementedException();
         }
-        void IEquipment.ToggleTwoHanding()
-        {
-            throw new NotImplementedException();
-        }
-        void IEquipment.UnequipItem(EquipmentItem item)
+        void IChangeEquipment.UnequipItem(string slot)
         {
             throw new NotImplementedException();
         }

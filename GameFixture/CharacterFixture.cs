@@ -6,7 +6,7 @@ using Game.Objects.Professions;
 namespace Characters
 {
     [TestClass]
-    public class CharacterCreation
+    public class CharacterFixture
     {
         Character Guinevere { get; set; }
         Character Alric { get; set; }
@@ -21,7 +21,7 @@ namespace Characters
         }
 
         [TestMethod]
-        public void character_has_correct_description_properties()
+        public void Character_has_correct_description_properties()
         {
             Assert.AreEqual("Alric", Alric.Name);
             Assert.AreEqual(Gender.Male, Alric.Gender);
@@ -40,14 +40,24 @@ namespace Characters
             Assert.AreEqual(Knight.Description, Guinevere.Profession.AltGenderDescription);
         }
         [TestMethod]
-        public void character_has_correct_starting_stats()
+        public void Character_has_correct_starting_stats()
         {
-            Assert.AreEqual(Knight.StartingAttributes, Guinevere.Attributes.Base);
-            Assert.AreEqual(Knight.StartingTalents, Guinevere.Talents.Base);
+            Assert.AreEqual(Knight.StartingAttributes, Guinevere.BaseAttributes.Base);
+            Assert.AreEqual(Knight.StartingTalents, Guinevere.BaseTalents.Base);
             Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.HP], Guinevere.HP);
             Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.SP], Guinevere.SP);
             Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.HPRegen], Guinevere.BaseHealthRegen);
             Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.SPRegen], Guinevere.BaseStaminaRegen);
+        }
+        [TestMethod]
+        public void Character_has_starting_items()
+        {
+            Guinevere.
+        }
+        [TestMethod]
+        public void Character_has_starting_equipment()
+        {
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Game.Constants;
 using Game.DAL.Interfaces;
+using Game.Objects.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +36,22 @@ namespace Game.DAL.Mocks
 
         Dictionary<string, string> IProfessionDAO.getStartingEquipment(string profession)
         {
-            return new Dictionary<string, string>() { };
+            return new Dictionary<string, string>()
+            {
+                { Slot.Body, EquipmentItems.Body.Naked },
+                { Slot.MainHand, EquipmentItems.Hands.BareHand },
+                { Slot.OffHand, EquipmentItems.Hands.BareHand },
+                { Slot.Charm1, EquipmentItems.Charms.None },
+                { Slot.Charm2, EquipmentItems.Charms.None }
+            };
+        }
+
+        Dictionary<string, int> IProfessionDAO.getStartingItems(string id)
+        {
+            return new Dictionary<string, int>()
+            {
+                { Items.VendorTrash.Junk, 2 }
+            };
         }
 
         Dictionary<int, string> IProfessionDAO.getStartingSkills(string profession)
