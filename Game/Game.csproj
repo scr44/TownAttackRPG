@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DAL\" />
+    <Folder Include="Objects\Items\" />
+    <Folder Include="Objects\Effects\" />
+    <Folder Include="Objects\Skills\" />
+    <Folder Include="Objects\Professions\" />
+    <Folder Include="Scenario\Core\" />
+  </ItemGroup>
+
+</Project>

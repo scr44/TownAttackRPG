@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TownAttackAPI", "TownAttackAPI.csproj", "{709A5720-70A9-46AE-ABC1-B7460092DF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "..\Game\Game.csproj", "{4C184579-8CD2-431C-8C32-42C772ACED18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFixture", "..\GameFixture\GameFixture.csproj", "{C144152A-C039-4AA9-A7CA-9650463EFA24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{709A5720-70A9-46AE-ABC1-B7460092DF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709A5720-70A9-46AE-ABC1-B7460092DF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709A5720-70A9-46AE-ABC1-B7460092DF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709A5720-70A9-46AE-ABC1-B7460092DF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C184579-8CD2-431C-8C32-42C772ACED18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C184579-8CD2-431C-8C32-42C772ACED18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C184579-8CD2-431C-8C32-42C772ACED18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C184579-8CD2-431C-8C32-42C772ACED18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C144152A-C039-4AA9-A7CA-9650463EFA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C144152A-C039-4AA9-A7CA-9650463EFA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C144152A-C039-4AA9-A7CA-9650463EFA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C144152A-C039-4AA9-A7CA-9650463EFA24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FAB4B24-58CF-4901-A910-3646185D92E9}
+	EndGlobalSection
+EndGlobal
