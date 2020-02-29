@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,11 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DAL\" />
-    <Folder Include="Objects\Items\" />
     <Folder Include="Objects\Effects\" />
     <Folder Include="Objects\Skills\" />
-    <Folder Include="Objects\Professions\" />
     <Folder Include="Scenario\Core\" />
   </ItemGroup>
 

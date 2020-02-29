@@ -6,14 +6,19 @@ namespace Game.Constants
 {
     public static class Gender
     {
-        public static readonly string M = "Male";
-        public static readonly string F = "Female";
-        public static readonly string N = "No Gender";
+        public static readonly string Male = "Male";
+        public static readonly string Female = "Female";
+        public static readonly string NoGender = "No Gender";
     }
 
     public static class Race
     {
         public static readonly string Human = "Human";
+    }
+
+    public static class Prof
+    {
+        public static readonly string Knight = "Knight";
     }
 
     public static class Stat
@@ -33,11 +38,19 @@ namespace Game.Constants
         public static readonly string History = "History";
     }
 
+    public static class BaseStat
+    {
+        public static readonly string HP = "Base HP";
+        public static readonly string SP = "Base SP";
+        public static readonly string HPRegen = "Base HP Regen";
+        public static readonly string SPRegen = "Base SP Regen";
+    }
+
     public static class Slot
     {
+        public static readonly string Body = "Body";
         public static readonly string MainHand = "Main Hand";
         public static readonly string OffHand = "Off Hand";
-        public static readonly string Body = "Body";
         public static readonly string Charm1 = "Charm 1";
         public static readonly string Charm2 = "Charm 2";
     }

@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Game.Objects.Actors.Statistics
 {
-    public interface Health
+    public interface IHealth
     {
         public int HP { get; set; }
         public int MaxHP { get; }
         public double PercentHP { get; }
         public int BaseHP { get; set; }
-        public int BaseHPRegen { get; set; }
+        public int BaseHealthRegen { get; set; }
         public bool IsAlive { get; set; }
         public void AdjustHP(double points);
         public void Kill(double points);
@@ -21,13 +21,13 @@ namespace Game.Objects.Actors.Statistics
         public double Healed(double healAmt);
     }
 
-    public interface Stamina
+    public interface IStamina
     {
         public int SP { get; set; }
         public int MaxSP { get; }
         public double PercentSP { get; }
         public int BaseSP { get; set; }
-        public int BaseSPRegen { get; set; }
+        public int BaseStaminaRegen { get; set; }
         public void AdjustSP(double points);
         public void AdjustBaseSP(int points);
         public void AdjustBaseSPRegen(int points);
