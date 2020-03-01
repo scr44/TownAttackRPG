@@ -6,7 +6,22 @@ namespace Game.Objects.Items.InventoryAndEquipment
 {
     public class Inventory : IMoveItems
     {
-        public List<Item> Items { get; private set; }
+        public List<Item> Items { get; private set; } = new List<Item>();
+        public Dictionary<string, int> ItemCounts
+        {
+            get
+            {
+                var counts = new Dictionary<string, int>();
+                foreach (var item in Items)
+                {
+                    if(!counts.TryAdd(item.Name, 1))
+                    {
+                        counts[item.Name]++;
+                    }
+                }
+                return counts;
+            }
+        }
         public int Coins { get; private set; }
 
         public void SortInventory(string sortMethod)

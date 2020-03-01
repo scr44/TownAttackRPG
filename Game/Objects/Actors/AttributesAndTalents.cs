@@ -7,7 +7,7 @@ namespace Game.Objects.Actors
     public class Attributes
     {
         public Dictionary<string, int> Base { get; set; }
-        public int AttributePoints { get; private set; }
+        public int AttributePoints { get; private set; } = 0;
         private void AdjustAttribute(string stat, int points)
         {
             try
@@ -47,7 +47,7 @@ namespace Game.Objects.Actors
     public class Talents
     {
         public Dictionary<string, int> Base { get; set; }
-        public int TalentPoints { get; set; }
+        public int TalentPoints { get; set; } = 0;
         private void AdjustTalent(string stat, int points)
         {
             try

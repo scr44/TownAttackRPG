@@ -6,26 +6,50 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Game.Objects.Items.InventoryAndEquipment;
+using Game.DAL.Interfaces;
+using Game.DAL.Mocks;
 
 namespace Game.Objects.Actors
 {
     public class Character : Actor, IChangeEquipment
     {
-        public Character(string name, string gender, string race, string profession)
-            : base(name, gender, race)
+        // TODO: Dependency Injection
+        IItemDAO ItemDAO { get; set; } = new MockItemDAO();
+        IProfessionDAO ProfessionDAO { get; set; } = new MockProfessionDAO();
+        public Character(string name, string gender, string profession)
+            : base(name, gender)
         {
-            Profession = new Profession(profession);
+            Profession = ProfessionDAO.GetProfessionStats(profession);
             if (gender != Profession.DefaultGender)
             {
                 Profession.SwapDescriptions();
             }
+
             BaseAttributes = new Attributes() { Base = Profession.StartingAttributes };
             BaseTalents = new Talents() { Base = Profession.StartingTalents };
             BaseHP = (int)Profession.StartingHealthAndStamina[BaseStat.HP];
             BaseSP = (int)Profession.StartingHealthAndStamina[BaseStat.SP];
 
-            //TODO initialize Equipment and Inventory
-
+            EquipmentSlots = new Dictionary<string, EquipmentItem>()
+            {
+                { Slot.Body, ItemDAO.CreateEquipment(EquipmentNames.Body.Naked) },
+                { Slot.MainHand, ItemDAO.CreateEquipment(EquipmentNames.Hands.BareHand) },
+                { Slot.OffHand, ItemDAO.CreateEquipment(EquipmentNames.Hands.BareHand) },
+                { Slot.Charm1, ItemDAO.CreateEquipment(EquipmentNames.Charms.None) },
+                { Slot.Charm2, ItemDAO.CreateEquipment(EquipmentNames.Charms.None) }
+            };
+            foreach (var kvp in Profession.StartingEquipment)
+            {
+                Inventory.AddItem(ItemDAO.CreateEquipment(kvp.Value));
+                Equip(kvp.Key, (EquipmentItem)Inventory.Items[0]);
+            }
+            foreach (var kvp in Profession.StartingInventory)
+            {
+                for (int i = 0; i < kvp.Value; i++)
+                {
+                    Inventory.AddItem(ItemDAO.CreateEquipment(kvp.Key));
+                }
+            }
             HP = MaxHP;
             SP = MaxSP;
         }
@@ -59,27 +83,56 @@ namespace Game.Objects.Actors
             }
         }
 
-        public Inventory Inventory { get; protected set; }
+        public Inventory Inventory { get; protected set; } = new Inventory();
+        public Dictionary<string, EquipmentItem> EquipmentSlots { get; private set; }
 
-        #region Equipment
-        public Dictionary<string, EquipmentItem> Slots { get; private set; }
-        bool IsTwoHanding => Slots[Slot.OffHand].Name == EquipmentItems.Hands.TwoHanding;
+        bool IsTwoHanding => EquipmentSlots[Slot.OffHand].Name == EquipmentNames.Hands.TwoHanding;
+        public void Equip(string slot, EquipmentItem item)
+        {
+            if (!Inventory.Items.Contains(item))
+            {
+                throw new Exception("Item not in inventory.");
+            }
+            if (item.ValidSlots.Contains(slot) 
+                || (item.ValidSlots.Contains(Tags.ValidSlots.Charm) 
+                    && (slot == Slot.Charm1 || slot == Slot.Charm2)))
+            {
+                Unequip(slot);
+                EquipmentSlots[slot] = item;
+                Inventory.RemoveItem((Item)item);
+            }
+            else
+            {
+                throw new Exception("Invalid slot.");
+            }
+
+        }
+        public void Unequip(string slot)
+        {
+            if (EquipmentSlots[slot].Name != EquipmentNames.Hands.BareHand
+                && EquipmentSlots[slot].Name != EquipmentNames.Hands.TwoHanding)
+            {
+                Inventory.AddItem((Item)EquipmentSlots[slot]);
+            }
+            EquipmentSlots[slot] = ItemDAO.CreateEquipment(EquipmentNames.Hands.BareHand);
+        }
+        public void ToggleTwoHanding()
+        {
+            if (IsTwoHanding)
+            {
+                Unequip(Slot.OffHand);
+            }
+            else
+            {
+                if (EquipmentSlots[Slot.MainHand].Tags.Contains(Tags.Restrictions.CannotTwoHand))
+                {
+                    throw new Exception("Cannot two-hand this weapon.");
+                }
+                Unequip(Slot.OffHand);
+                EquipmentSlots[Slot.OffHand] = ItemDAO.CreateEquipment(EquipmentNames.Hands.TwoHanding);
+            }
+        }
+
         Dictionary<string, double> EquipmentModifiers { get; set; }
-        void IChangeEquipment.EquipItem(string slot, EquipmentItem item)
-        {
-            var oldItem = Slots[slot];
-            Slots[slot] = item;
-            Inventory.RemoveItem((Item)item);
-            Inventory.AddItem(oldItem);
-        }
-        void IChangeEquipment.ToggleTwoHanding()
-        {
-            throw new NotImplementedException();
-        }
-        void IChangeEquipment.UnequipItem(string slot)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
 }

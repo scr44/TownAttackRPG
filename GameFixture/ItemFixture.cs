@@ -1,18 +1,21 @@
 ﻿using Game.Constants;
+using Game.DAL.Interfaces;
+using Game.DAL.Mocks;
 using Game.Objects.Items;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GameFixture
+namespace Fixtures
 {
     [TestClass]
     public class ItemFixture
     {
+        IItemDAO ItemDAO { get; set; } = new MockItemDAO();
         Item TestItem { get; set; }
 
         [TestInitialize]
         public void Create_items()
         {
-            TestItem = new Item(Items.TestItem);
+            TestItem = ItemDAO.CreateItem(ItemNames.TestItem);
         }
 
         [TestMethod]

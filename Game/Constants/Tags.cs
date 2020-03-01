@@ -19,16 +19,16 @@ namespace Game.Constants
 
         public static class Equipment
         {
-            public static readonly string Weapon = "Weapon";
             public static class Weapons
             {
+                public static readonly string Weapon = "Weapon";
                 public static readonly string Sword = "Sword";
                 public static readonly string Shield = "Shield";
             }
 
-            public static readonly string Armor = "Armor";
             public static class Armors
             {
+                public static readonly string Armor = "Armor";
                 public static readonly string Heavy = "Heavy";
                 public static readonly string Light = "Light";
             }
@@ -40,11 +40,13 @@ namespace Game.Constants
             public static readonly string MainHand = "Main Hand";
             public static readonly string OffHand = "Off Hand";
             public static readonly string Charm = "Charm";
+        }
+        public static class Restrictions
+        {
             public static readonly string MustTwoHand = "Must be Two-Handed";
             public static readonly string CannotTwoHand = "Cannot be Two-Handed";
             public static readonly string CannotDualWield = "Cannot be Dual Wielded";
         }
-
         public static class Races
         {
 

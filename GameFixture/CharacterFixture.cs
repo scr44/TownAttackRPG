@@ -2,12 +2,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Game.Constants;
 using Game.Objects.Actors;
 using Game.Objects.Professions;
+using Game.DAL.Interfaces;
+using Game.DAL.Mocks;
 
-namespace Characters
+namespace Fixtures
 {
     [TestClass]
     public class CharacterFixture
     {
+        IProfessionDAO ProfessionDAO { get; set; } = new MockProfessionDAO();
         Character Guinevere { get; set; }
         Character Alric { get; set; }
         Profession Knight { get; set; }
@@ -15,9 +18,9 @@ namespace Characters
         [TestInitialize]
         public void generate_test_characters()
         {
-            Guinevere = new Character("Guinevere", Gender.Female, Race.Human, Prof.Knight);
-            Alric = new Character("Alric", Gender.Male, Race.Human, Prof.Knight);
-            Knight = new Profession(Prof.Knight);
+            Guinevere = new Character("Guinevere", Gender.Female, Prof.Knight);
+            Alric = new Character("Alric", Gender.Male, Prof.Knight);
+            Knight = ProfessionDAO.GetProfessionStats(Prof.Knight);
         }
 
         [TestMethod]
@@ -52,12 +55,19 @@ namespace Characters
         [TestMethod]
         public void Character_has_starting_items()
         {
-            Guinevere.
+            Assert.AreEqual(Knight.StartingInventory.Count, Guinevere.Inventory.ItemCounts.Count);
+            foreach (var kvp in Knight.StartingInventory)
+            {
+                Assert.AreEqual(kvp.Value, Guinevere.Inventory.ItemCounts[kvp.Key]);
+            }
         }
         [TestMethod]
         public void Character_has_starting_equipment()
         {
-
+            foreach (var kvp in Guinevere.EquipmentSlots)
+            {
+                Assert.AreEqual(Knight.StartingEquipment[kvp.Key], Guinevere.EquipmentSlots[kvp.Key].Name);
+            }
         }
     }
 }

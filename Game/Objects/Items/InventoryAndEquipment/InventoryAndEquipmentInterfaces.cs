@@ -13,8 +13,8 @@ namespace Game.Objects.Items.InventoryAndEquipment
 
     public interface IChangeEquipment
     {
-        public void EquipItem(string slot, EquipmentItem item);
-        public void UnequipItem(string slot);
+        public void Equip(string slot, EquipmentItem item);
+        public void Unequip(string slot);
         public void ToggleTwoHanding();
     }
 }

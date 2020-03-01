@@ -1,6 +1,7 @@
 ﻿using Game.Constants;
 using Game.DAL.Interfaces;
 using Game.Objects.Items;
+using Game.Objects.Professions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,93 +10,56 @@ namespace Game.DAL.Mocks
 {
     public class MockProfessionDAO : IProfessionDAO
     {
-        string IProfessionDAO.getTitle(string profession)
+        public Profession GetProfessionStats(string title)
         {
-            return "Title";
-        }
-
-        string IProfessionDAO.getAltGenderDescription(string profession)
-        {
-            return "AltGenderDescription";
-        }
-
-        string IProfessionDAO.getAltGenderTitle(string profession)
-        {
-            return "AltGenderTitle";
-        }
-
-        string IProfessionDAO.getDescription(string profession)
-        {
-            return "Description";
-        }
-
-        string IProfessionDAO.getDefaultGender(string profession)
-        {
-            return "Male";
-        }
-
-        Dictionary<string, string> IProfessionDAO.getStartingEquipment(string profession)
-        {
-            return new Dictionary<string, string>()
+            return new Profession()
             {
-                { Slot.Body, EquipmentItems.Body.Naked },
-                { Slot.MainHand, EquipmentItems.Hands.BareHand },
-                { Slot.OffHand, EquipmentItems.Hands.BareHand },
-                { Slot.Charm1, EquipmentItems.Charms.None },
-                { Slot.Charm2, EquipmentItems.Charms.None }
-            };
-        }
+                DefaultGender = Gender.Male,
+                Title = "Title",
+                Description = "Description",
+                AltGenderTitle = "AltTitle",
+                AltGenderDescription = "AltDescription",
+                StartingAttributes = new Dictionary<string, int>()
+                {
+                    { Stat.STR, 5 },
+                    { Stat.DEX, 5 },
+                    { Stat.SKL, 5 },
+                    { Stat.APT, 5 },
+                    { Stat.FOR, 5 },
+                    { Stat.CHA, 5 }
+                },
+                StartingTalents = new Dictionary<string, int>()
+                {
+                    { Stat.Medicine, 0 },
+                    { Stat.Explosives, 0 },
+                    { Stat.Veterancy, 0 },
+                    { Stat.Bestiary, 0 },
+                    { Stat.Engineering, 0 },
+                    { Stat.History, 0 }
+                },
+                StartingHealthAndStamina = new Dictionary<string, double>()
+                {
+                    { BaseStat.HP, 10 },
+                    { BaseStat.SP, 10 },
+                    { BaseStat.HPRegen, 0 },
+                    { BaseStat.SPRegen, 5 }
+                },
+                StartingInventory = new Dictionary<string, int>()
+                {
+                    { ItemNames.VendorTrash.Junk, 2 }
+                },
+                StartingEquipment = new Dictionary<string, string>()
+                {
+                    { Slot.Body, EquipmentNames.Body.Naked },
+                    { Slot.MainHand, EquipmentNames.Hands.Longsword },
+                    { Slot.OffHand, EquipmentNames.Hands.BareHand },
+                    { Slot.Charm1, EquipmentNames.Charms.None },
+                    { Slot.Charm2, EquipmentNames.Charms.None }
+                },
+                StartingSkills = new Dictionary<int, string>()
+                {
 
-        Dictionary<string, int> IProfessionDAO.getStartingItems(string id)
-        {
-            return new Dictionary<string, int>()
-            {
-                { Items.VendorTrash.Junk, 2 }
-            };
-        }
-
-        Dictionary<int, string> IProfessionDAO.getStartingSkills(string profession)
-        {
-            return new Dictionary<int, string>()
-            {
-
-            };
-        }
-
-        Dictionary<string, int> IProfessionDAO.getStartingAttributes(string profession)
-        {
-            return new Dictionary<string, int>()
-            {
-                { Stat.STR, 5 },
-                { Stat.DEX, 5 },
-                { Stat.SKL, 5 },
-                { Stat.APT, 5 },
-                { Stat.FOR, 5 },
-                { Stat.CHA, 5 }
-            };
-        }
-
-        Dictionary<string, int> IProfessionDAO.getStartingTalents(string profession)
-        {
-            return new Dictionary<string, int>()
-            {
-                { Stat.Medicine, 0 },
-                { Stat.Explosives, 0 },
-                { Stat.Veterancy, 0 },
-                { Stat.Bestiary, 0 },
-                { Stat.Engineering, 0 },
-                { Stat.History, 0 }
-            };
-        }
-
-        Dictionary<string, double> IProfessionDAO.getStartingHealthAndStamina(string profession)
-        {
-            return new Dictionary<string, double>()
-            {
-                { BaseStat.HP, 10 },
-                { BaseStat.SP, 10 },
-                { BaseStat.HPRegen, 0 },
-                { BaseStat.SPRegen, 5 }
+                }
             };
         }
     }

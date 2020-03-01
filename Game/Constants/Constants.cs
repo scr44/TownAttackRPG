@@ -67,7 +67,7 @@ namespace Game.Constants
         public static readonly string Poison = "Poison";
     }
 
-    public static class Items
+    public static class ItemNames
     {
         public static readonly string TestItem = "Test Item";
         
@@ -82,7 +82,7 @@ namespace Game.Constants
         }
     }
 
-    public static class EquipmentItems
+    public static class EquipmentNames
     {
         public static class Body
         {
@@ -92,6 +92,7 @@ namespace Game.Constants
         {
             public static readonly string BareHand = "Bare Hand";
             public static readonly string TwoHanding = "Two-handing";
+            public static readonly string Longsword = "Longsword";
         }
         public static class Charms
         {
