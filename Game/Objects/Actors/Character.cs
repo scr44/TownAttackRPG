@@ -42,15 +42,15 @@ namespace Game.Objects.Actors
 
             EquipmentSlots = new Dictionary<string, EquipmentItem>()
             {
-                { Slot.Body, ItemDAO.CreateEquipment(EquipmentNames.Body.Naked) },
-                { Slot.MainHand, ItemDAO.CreateEquipment(EquipmentNames.Hands.BareHand) },
-                { Slot.OffHand, ItemDAO.CreateEquipment(EquipmentNames.Hands.BareHand) },
-                { Slot.Charm1, ItemDAO.CreateEquipment(EquipmentNames.Charms.None) },
-                { Slot.Charm2, ItemDAO.CreateEquipment(EquipmentNames.Charms.None) }
+                { Slot.Body, ItemDAO.GetEquipment(EquipmentCatalog.Body.Naked) },
+                { Slot.MainHand, ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand) },
+                { Slot.OffHand, ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand) },
+                { Slot.Charm1, ItemDAO.GetEquipment(EquipmentCatalog.Charms.None) },
+                { Slot.Charm2, ItemDAO.GetEquipment(EquipmentCatalog.Charms.None) }
             };
             foreach (var kvp in Profession.StartingEquipment)
             {
-                Inventory.AddItem(ItemDAO.CreateEquipment(kvp.Value));
+                Inventory.AddItem(ItemDAO.GetEquipment(kvp.Value));
                 try
                 {
                     Equip(kvp.Key, (EquipmentItem)Inventory.Items[0]);
@@ -64,7 +64,7 @@ namespace Game.Objects.Actors
             {
                 for (int i = 0; i < kvp.Value; i++)
                 {
-                    Inventory.AddItem(ItemDAO.CreateEquipment(kvp.Key));
+                    Inventory.AddItem(ItemDAO.GetEquipment(kvp.Key));
                 }
             }
             HP = MaxHP;
@@ -102,7 +102,7 @@ namespace Game.Objects.Actors
 
         public Inventory Inventory { get; protected set; } = new Inventory();
         public Dictionary<string, EquipmentItem> EquipmentSlots { get; private set; }
-        bool IsTwoHanding => EquipmentSlots[Slot.OffHand].Name == EquipmentNames.Hands.TwoHanding;
+        bool IsTwoHanding => EquipmentSlots[Slot.OffHand].Name == EquipmentCatalog.Hands.TwoHanding;
         
         public void Equip(string slot, EquipmentItem item)
         {
@@ -150,12 +150,12 @@ namespace Game.Objects.Actors
         }
         public void Unequip(string slot)
         {
-            if (EquipmentSlots[slot].Name != EquipmentNames.Hands.BareHand
-                && EquipmentSlots[slot].Name != EquipmentNames.Hands.TwoHanding)
+            if (EquipmentSlots[slot].Name != EquipmentCatalog.Hands.BareHand
+                && EquipmentSlots[slot].Name != EquipmentCatalog.Hands.TwoHanding)
             {
                 Inventory.AddItem((Item)EquipmentSlots[slot]);
             }
-            EquipmentSlots[slot] = ItemDAO.CreateEquipment(EquipmentNames.Hands.BareHand);
+            EquipmentSlots[slot] = ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand);
         }
         public void ToggleTwoHanding()
         {
@@ -170,7 +170,7 @@ namespace Game.Objects.Actors
                     throw new CannotTwoHandException();
                 }
                 Unequip(Slot.OffHand);
-                EquipmentSlots[Slot.OffHand] = ItemDAO.CreateEquipment(EquipmentNames.Hands.TwoHanding);
+                EquipmentSlots[Slot.OffHand] = ItemDAO.GetEquipment(EquipmentCatalog.Hands.TwoHanding);
             }
         }
 

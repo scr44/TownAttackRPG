@@ -8,6 +8,7 @@ namespace Game.Objects.Items
 {
     public class Item
     {
+        public string id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Value { get; set; }

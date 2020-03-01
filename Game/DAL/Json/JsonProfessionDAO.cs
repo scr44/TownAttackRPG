@@ -13,29 +13,24 @@ namespace Game.DAL.Json
     public class JsonProfessionDAO : IProfessionDAO
     {
         readonly string path = "../../../../Game/DAL/Json/professions.json";
-        string jsonData;
 
         public Profession GetProfession(string title)
         {
-            if (jsonData == null)
+            using (StreamReader sr = new StreamReader(path))
             {
-                using (StreamReader sr = new StreamReader(path))
+                string jsonData = sr.ReadToEnd();
+                List<Profession> professionCatalog = JsonConvert.DeserializeObject<List<Profession>>(jsonData);
+                var searchResults = (from p in professionCatalog
+                                        where (p.Title == title || p.AltGenderTitle == title)
+                                        select p).ToList();
+                if (searchResults.Count == 0)
                 {
-                    jsonData = sr.ReadToEnd();
+                    throw new InvalidProfessionException();
                 }
-            }
-            
-            List<Profession> professionCatalog = JsonConvert.DeserializeObject<List<Profession>>(jsonData);
-            var results = (from p in professionCatalog
-                           where (p.Title == title || p.AltGenderTitle == title)
-                           select p).ToList();
-            if (results.Count == 0)
-            {
-                throw new InvalidProfessionException();
-            }
-            else
-            {
-                return results[0];
+                else
+                {
+                    return searchResults[0];
+                }
             }
         }
     }

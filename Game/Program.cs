@@ -48,15 +48,15 @@ namespace Game
                 },
                 StartingInventory = new Dictionary<string, int>()
                 {
-                    { ItemNames.VendorTrash.Junk, 2 }
+                    { ItemCatalog.VendorTrash.Junk, 2 }
                 },
                 StartingEquipment = new Dictionary<string, string>()
                 {
-                    { Slot.Body, EquipmentNames.Body.Naked },
-                    { Slot.MainHand, EquipmentNames.Hands.Longsword },
-                    { Slot.OffHand, EquipmentNames.Hands.BareHand },
-                    { Slot.Charm1, EquipmentNames.Charms.None },
-                    { Slot.Charm2, EquipmentNames.Charms.None }
+                    { Slot.Body, EquipmentCatalog.Body.Naked },
+                    { Slot.MainHand, EquipmentCatalog.Hands.Longsword },
+                    { Slot.OffHand, EquipmentCatalog.Hands.BareHand },
+                    { Slot.Charm1, EquipmentCatalog.Charms.None },
+                    { Slot.Charm2, EquipmentCatalog.Charms.None }
                 },
                 StartingSkills = new Dictionary<int, string>()
                 {

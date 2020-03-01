@@ -7,7 +7,10 @@ namespace Game.DAL.Interfaces
 {
     public interface IItemDAO
     {
-        public Item CreateItem(string id);
-        public EquipmentItem CreateEquipment(string id);
+        public Item GetItem(string id);
+        public EquipmentItem GetEquipment(string id);
     }
+
+    public class InvalidItemException : Exception { }
+    public class InvalidEquipmentItemException : Exception { }
 }

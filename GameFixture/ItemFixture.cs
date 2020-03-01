@@ -10,12 +10,11 @@ namespace Fixtures
     public class ItemFixture
     {
         IItemDAO ItemDAO { get; set; } = new MockItemDAO();
-        Item TestItem { get; set; }
 
         [TestInitialize]
         public void Create_items()
         {
-            TestItem = ItemDAO.CreateItem(ItemNames.TestItem);
+            TestItem = ItemDAO.GetItem(ItemCatalog.TestItem);
         }
 
         [TestMethod]

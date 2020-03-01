@@ -63,15 +63,6 @@ namespace Game.Constants
         public static readonly string SPRegen = "Base SP Regen";
     }
 
-    public static class Slot
-    {
-        public static readonly string Body = "Body";
-        public static readonly string MainHand = "Main Hand";
-        public static readonly string OffHand = "Off Hand";
-        public static readonly string Charm1 = "Charm 1";
-        public static readonly string Charm2 = "Charm 2";
-    }
-
     public static class DmgType
     {
         public static readonly string Slashing = "Slashing";
@@ -81,36 +72,12 @@ namespace Game.Constants
         public static readonly string Poison = "Poison";
     }
 
-    public static class ItemNames
+    public static class Slot
     {
-        public static readonly string TestItem = "Test Item";
-        
-        public static class Consumables
-        {
-
-        }
-
-        public static class VendorTrash
-        {
-            public static readonly string Junk = "Junk";
-        }
-    }
-
-    public static class EquipmentNames
-    {
-        public static class Body
-        {
-            public static readonly string Naked = "Naked";
-        }
-        public static class Hands
-        {
-            public static readonly string BareHand = "Bare Hand";
-            public static readonly string TwoHanding = "Two-handing";
-            public static readonly string Longsword = "Longsword";
-        }
-        public static class Charms
-        {
-            public static readonly string None = "None";
-        }
+        public static readonly string Body = "Body";
+        public static readonly string MainHand = "Main Hand";
+        public static readonly string OffHand = "Off Hand";
+        public static readonly string Charm1 = "Charm 1";
+        public static readonly string Charm2 = "Charm 2";
     }
 }

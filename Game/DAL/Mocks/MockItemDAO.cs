@@ -10,7 +10,7 @@ namespace Game.DAL.Mocks
 {
     public class MockItemDAO : IItemDAO
     {
-        public Item CreateItem(string id)
+        public Item GetItem(string id)
         {
             return new Item()
             {
@@ -21,11 +21,11 @@ namespace Game.DAL.Mocks
             };
         }
 
-        public EquipmentItem CreateEquipment(string id)
+        public EquipmentItem GetEquipment(string id)
         {
             var newItem = new EquipmentItem()
             {
-                Name = EquipmentNames.Hands.Longsword,
+                Name = EquipmentCatalog.Hands.Longsword,
                 Description = "Description",
                 Value = 10,
                 Weight = 10.15,
