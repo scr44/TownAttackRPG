@@ -20,7 +20,7 @@ namespace Fixtures
         {
             Guinevere = new Character("Guinevere", Gender.Female, Prof.Knight);
             Alric = new Character("Alric", Gender.Male, Prof.Knight);
-            Knight = ProfessionDAO.GetProfessionStats(Prof.Knight);
+            Knight = ProfessionDAO.GetProfession(Prof.Knight);
         }
 
         [TestMethod]
@@ -45,12 +45,12 @@ namespace Fixtures
         [TestMethod]
         public void Character_has_correct_starting_stats()
         {
-            Assert.AreEqual(Knight.StartingAttributes, Guinevere.BaseAttributes.Base);
-            Assert.AreEqual(Knight.StartingTalents, Guinevere.BaseTalents.Base);
-            Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.HP], Guinevere.HP);
-            Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.SP], Guinevere.SP);
-            Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.HPRegen], Guinevere.BaseHealthRegen);
-            Assert.AreEqual(Knight.StartingHealthAndStamina[BaseStat.SPRegen], Guinevere.BaseStaminaRegen);
+            CollectionAssert.AreEqual(Knight.StartingAttributes, Guinevere.BaseAttributes.Base);
+            CollectionAssert.AreEqual(Knight.StartingTalents, Guinevere.BaseTalents.Base);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.HP], Guinevere.HP);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.SP], Guinevere.SP);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.HPRegen], Guinevere.BaseHealth.HPRegen);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.SPRegen], Guinevere.BaseStamina.SPRegen);
         }
         [TestMethod]
         public void Character_has_starting_items()

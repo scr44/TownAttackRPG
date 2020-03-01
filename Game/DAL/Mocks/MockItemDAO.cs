@@ -33,10 +33,7 @@ namespace Game.DAL.Mocks
                 MaxDurability = 100,
                 ValidSlots = new List<string>()
                 {
-                    ValidSlots.Body,
-                    ValidSlots.MainHand,
-                    ValidSlots.OffHand,
-                    ValidSlots.Charm
+                    ValidSlots.MainHand
                 },
                 Tags = new List<string>()
                 {

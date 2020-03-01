@@ -8,6 +8,6 @@ namespace Game.DAL.Interfaces
 {
     public interface IProfessionDAO
     {
-        public Profession GetProfessionStats(string title);
+        public Profession GetProfession(string title);
     }
 }
