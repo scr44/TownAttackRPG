@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Game.Objects.Actors
 {
-    class Enemy : Actor
+    public class Enemy : Actor
     {
+        public Enemy(string name, string gender) : base(name, gender)
+        {
+
+        }
     }
 }

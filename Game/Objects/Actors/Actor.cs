@@ -6,43 +6,30 @@ using System.Text;
 
 namespace Game.Objects.Actors
 {
-    abstract class Actor : Health, Stamina
+    public abstract class Actor : IHealth, IStamina
     {
-        public Actor() { }
-
-        public string Name { get; private set; }
-        public string Gender { get; private set; } // TODO: add pronouns for string interpolation
-        public string Race { get; private set; }
-
-        public Dictionary<string,int> Modifiers
+        public Actor(string name, string gender)
         {
-            get
-            {
-                return new Dictionary<string, int>()
-                {
-                    { Stat.STR, 5 },
-                    { Stat.DEX, 5 },
-                    { Stat.SKL, 5 },
-                    { Stat.APT, 5 },
-                    { Stat.FOR, 5 },
-                    { Stat.CHA, 5 },
-
-                    { Stat.Medicine, 0 },
-                    { Stat.Explosives, 0 },
-                    { Stat.Veterancy, 0 },
-                    { Stat.Bestiary, 0 },
-                    { Stat.Engineering, 0 },
-                    { Stat.History, 0 }
-                };
-            }
+            Name = name;
+            Gender = gender;
         }
+
+        public string Name { get; protected set; }
+        public string Gender { get; protected set; } // TODO: add pronouns for string interpolation
+        public string Race { get; protected set; } = Constants.Race.Human;
+
+        public Dictionary<string, int?> EffectModifiers { get; set; } = new Dictionary<string, int?>();
+        public Dictionary<string, double?> OffenseModifiers { get; set; } = new Dictionary<string, double?>();
+        public Dictionary<string, double?> DefenseModifiers { get; set; } = new Dictionary<string, double?>();
+        public Dictionary<string, int?> StatModifiers { get; set; } = new Dictionary<string, int?>();
+        public Dictionary<string, double?> TotalModifiers { get; } = new Dictionary<string, double?>(); // TODO: Calculate total modifier
 
         #region Health
         public int HP { get; set; }
-        public int MaxHP { get; set; }
-        public double PercentHP => Math.Round((((double)HP / MaxHP * 100)));
+        public int MaxHP => BaseHP + (StatModifiers[Stat.MaxHP] ?? 0);
+        public double PercentHP => Math.Round(((HP / (double)MaxHP * 100)));
         public int BaseHP { get; set; }
-        public int BaseHPRegen { get; set; }
+        public int BaseHealthRegen { get; set; }
         public bool IsAlive { get; set; } = true;
         public void AdjustBaseHP(int points)
         {
@@ -76,10 +63,10 @@ namespace Game.Objects.Actors
 
         #region Stamina
         public int SP { get; set; }
-        public int MaxSP { get; }
-        public double PercentSP { get; }
+        public int MaxSP => BaseSP + (StatModifiers[Stat.MaxSP] ?? 0);
+        public double PercentSP => Math.Round((SP / (double)MaxSP), 2) * 100;
         public int BaseSP { get; set; }
-        public int BaseSPRegen { get; set; }
+        public int BaseStaminaRegen { get; set; }
         public void AdjustSP(double points)
         {
             throw new NotImplementedException();
