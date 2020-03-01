@@ -10,4 +10,6 @@ namespace Game.DAL.Interfaces
     {
         public Profession GetProfession(string title);
     }
+
+    public class InvalidProfessionException : Exception { }
 }

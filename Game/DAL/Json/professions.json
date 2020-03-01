@@ -1,3 +1,40 @@
-{
-
-}
+[
+  {
+    "Title": "Knight",
+    "DefaultGender": "Male",
+    "Description": "A sturdy knight in plate armor.",
+    "AltGenderTitle": "Female Knight",
+    "AltGenderDescription": "A female knight in plate armor.",
+    "StartingAttributes": {
+      "STR": 5,
+      "DEX": 5,
+      "SKL": 5,
+      "APT": 5,
+      "FOR": 5,
+      "CHA": 5
+    },
+    "StartingTalents": {
+      "Medicine": 0,
+      "Explosives": 0,
+      "Veterancy": 0,
+      "Bestiary": 0,
+      "Engineering": 0,
+      "History": 0
+    },
+    "StartingVitals": {
+      "Base HP": 10.0,
+      "Base SP": 10.0,
+      "Base HP Regen": 0.0,
+      "Base SP Regen": 5.0
+    },
+    "StartingInventory": { "Junk": 2 },
+    "StartingEquipment": {
+      "Body": "Naked",
+      "Main Hand": "Longsword",
+      "Off Hand": "Bare Hand",
+      "Charm 1": "None",
+      "Charm 2": "None"
+    },
+    "StartingSkills": {}
+  },
+]

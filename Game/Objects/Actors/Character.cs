@@ -9,14 +9,15 @@ using Game.Objects.Items.InventoryAndEquipment;
 using Game.DAL.Interfaces;
 using Game.DAL.Mocks;
 using Game.Objects.Actors.VitalsClasses;
+using Game.DAL.Json;
 
 namespace Game.Objects.Actors
 {
     public class Character : Actor, IChangeEquipment
     {
         // TODO: Dependency Injection
-        IItemDAO ItemDAO { get; set; } = new MockItemDAO();
-        IProfessionDAO ProfessionDAO { get; set; } = new MockProfessionDAO();
+        IItemDAO ItemDAO { get; set; } = new JsonItemDAO();
+        IProfessionDAO ProfessionDAO { get; set; } = new JsonProfessionDAO();
         public Character(string name, string gender, string profession)
             : base(name, gender)
         {

@@ -2,6 +2,7 @@
 using Game.DAL.Interfaces;
 using Game.Objects.Items;
 using Game.Objects.Professions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -62,6 +63,8 @@ namespace Game
 
                 }
             };
+            var json = JsonConvert.SerializeObject(prof);
+            Console.Write("");
         }
     }
 }

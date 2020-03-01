@@ -4,13 +4,14 @@ using Game.Objects.Actors;
 using Game.Objects.Professions;
 using Game.DAL.Interfaces;
 using Game.DAL.Mocks;
+using Game.DAL.Json;
 
 namespace Fixtures
 {
     [TestClass]
     public class CharacterFixture
     {
-        IProfessionDAO ProfessionDAO { get; set; } = new MockProfessionDAO();
+        IProfessionDAO ProfessionDAO { get; set; } = new JsonProfessionDAO();
         Character Guinevere { get; set; }
         Character Alric { get; set; }
         Profession Knight { get; set; }
@@ -22,7 +23,20 @@ namespace Fixtures
             Alric = new Character("Alric", Gender.Male, Prof.Knight);
             Knight = ProfessionDAO.GetProfession(Prof.Knight);
         }
-
+        [TestMethod]
+        public void Bad_prof_request_throws_exception()
+        {
+            Assert.AreEqual(Knight.Title, Prof.Knight);
+            try
+            {
+                ProfessionDAO.GetProfession("Fake Profession Title");
+                Assert.IsTrue(false);
+            }
+            catch (InvalidProfessionException)
+            {
+                Assert.IsTrue(true);
+            }
+        }
         [TestMethod]
         public void Character_has_correct_description_properties()
         {
