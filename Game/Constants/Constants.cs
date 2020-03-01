@@ -21,7 +21,7 @@ namespace Game.Constants
         public static readonly string Knight = "Knight";
     }
 
-    public static class Stat
+    public static class Att
     {
         public static readonly string STR = "STR";
         public static readonly string DEX = "DEX";
@@ -29,22 +29,24 @@ namespace Game.Constants
         public static readonly string APT = "APT";
         public static readonly string FOR = "FOR";
         public static readonly string CHA = "CHA";
+    }
 
+    public static class Tal
+    {
         public static readonly string Medicine = "Medicine";
         public static readonly string Explosives = "Explosives";
         public static readonly string Veterancy = "Veterancy";
         public static readonly string Bestiary = "Bestiary";
         public static readonly string Engineering = "Engineering";
         public static readonly string History = "History";
-
-        public static readonly string MaxHP = "Max HP";
-        public static readonly string MaxSP = "Max SP";
     }
 
-    public static class BaseStat
+    public static class Vitals
     {
         public static readonly string HP = "Base HP";
         public static readonly string SP = "Base SP";
+        public static readonly string MaxHP = "Max HP";
+        public static readonly string MaxSP = "Max SP";
         public static readonly string HPRegen = "Base HP Regen";
         public static readonly string SPRegen = "Base SP Regen";
     }

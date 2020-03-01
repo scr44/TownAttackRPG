@@ -10,7 +10,7 @@ namespace Game.DAL.Mocks
 {
     public class MockProfessionDAO : IProfessionDAO
     {
-        public Profession GetProfessionStats(string title)
+        public Profession GetProfession(string title)
         {
             return new Profession()
             {
@@ -21,28 +21,28 @@ namespace Game.DAL.Mocks
                 AltGenderDescription = "AltDescription",
                 StartingAttributes = new Dictionary<string, int>()
                 {
-                    { Stat.STR, 5 },
-                    { Stat.DEX, 5 },
-                    { Stat.SKL, 5 },
-                    { Stat.APT, 5 },
-                    { Stat.FOR, 5 },
-                    { Stat.CHA, 5 }
+                    { Att.STR, 5 },
+                    { Att.DEX, 5 },
+                    { Att.SKL, 5 },
+                    { Att.APT, 5 },
+                    { Att.FOR, 5 },
+                    { Att.CHA, 5 }
                 },
                 StartingTalents = new Dictionary<string, int>()
                 {
-                    { Stat.Medicine, 0 },
-                    { Stat.Explosives, 0 },
-                    { Stat.Veterancy, 0 },
-                    { Stat.Bestiary, 0 },
-                    { Stat.Engineering, 0 },
-                    { Stat.History, 0 }
+                    { Tal.Medicine, 0 },
+                    { Tal.Explosives, 0 },
+                    { Tal.Veterancy, 0 },
+                    { Tal.Bestiary, 0 },
+                    { Tal.Engineering, 0 },
+                    { Tal.History, 0 }
                 },
-                StartingHealthAndStamina = new Dictionary<string, double>()
+                StartingVitals = new Dictionary<string, double>()
                 {
-                    { BaseStat.HP, 10 },
-                    { BaseStat.SP, 10 },
-                    { BaseStat.HPRegen, 0 },
-                    { BaseStat.SPRegen, 5 }
+                    { Vitals.HP, 10 },
+                    { Vitals.SP, 10 },
+                    { Vitals.HPRegen, 0 },
+                    { Vitals.SPRegen, 5 }
                 },
                 StartingInventory = new Dictionary<string, int>()
                 {

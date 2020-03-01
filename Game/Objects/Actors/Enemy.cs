@@ -10,5 +10,10 @@ namespace Game.Objects.Actors
         {
 
         }
+
+        public override double GetModifier(string stat)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
