@@ -14,6 +14,7 @@ namespace Game.Objects.Professions
         public string AltGenderDescription { get; set; }
         public Dictionary<string, int> StartingAttributes { get; set; }
         public Dictionary<string, int> StartingTalents { get; set; }
+
         public Dictionary<string, double> StartingVitals { get; set;}
         public Dictionary<string, int> StartingInventory { get; set;}
         public Dictionary<string, string> StartingEquipment { get; set;}

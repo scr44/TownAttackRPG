@@ -145,6 +145,7 @@ namespace Game.Objects.Actors
             {
                 ToggleTwoHanding();
             }
+
         }
         public void Unequip(string slot)
         {

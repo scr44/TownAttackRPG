@@ -17,7 +17,7 @@ namespace Game.Objects.Items.InventoryAndEquipment
         public void Unequip(string slot);
         public void ToggleTwoHanding();
     }
-
+  
     public class NotInInventoryException : Exception { }
     public class InvalidSlotException : Exception { }
     public class CannotDualWieldException : Exception { }
