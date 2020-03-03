@@ -1,5 +1,6 @@
 ﻿using Game.Constants;
 using Game.DAL.Interfaces;
+using Game.DAL.Json;
 using Game.Objects.Items;
 using Game.Objects.Professions;
 using Newtonsoft.Json;
@@ -13,14 +14,15 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Constants.Slot.MainHand);
-            var prof = new Objects.Professions.Profession()
+            var ProfDAO = new JsonProfessionDAO();
+            var prof = new Profession()
             {
-                DefaultGender = Constants.Gender.Male,
-                Title = Constants.Prof.Knight,
+                id = Prof.Knight,
+                Title = "Hedge Knight",
+                DefaultGender = "Male",
                 Description = "A sturdy knight in plate armor.",
-                AltGenderTitle = "Female Knight",
-                AltGenderDescription = "A female knight in plate armor.",
+                AltGenderTitle = "Noble's Daughter",
+                AltGenderDescription = "The daughter of a noble, who preferred swords to knitting needles.",
                 StartingAttributes = new Dictionary<string, int>()
                 {
                     { Att.STR, 5 },
@@ -32,14 +34,9 @@ namespace Game
                 },
                 StartingTalents = new Dictionary<string, int>()
                 {
-                    { Tal.Medicine, 0 },
-                    { Tal.Explosives, 0 },
-                    { Tal.Veterancy, 0 },
-                    { Tal.Bestiary, 0 },
-                    { Tal.Engineering, 0 },
-                    { Tal.History, 0 }
+                    { Tal.Veterancy, 1 }
                 },
-                StartingVitals = new Dictionary<string, double>()
+                StartingVitals = new Dictionary<string, int>()
                 {
                     { Vitals.HP, 10 },
                     { Vitals.SP, 10 },
@@ -48,14 +45,14 @@ namespace Game
                 },
                 StartingInventory = new Dictionary<string, int>()
                 {
-                    { ItemCatalog.VendorTrash.Junk, 2 }
+                    { ItemCatalog.Consumables.HealingElixerSmall, 3 }
                 },
                 StartingEquipment = new Dictionary<string, string>()
                 {
-                    { Slot.Body, EquipmentCatalog.Body.Naked },
+                    { Slot.Body, EquipmentCatalog.Body.FullPlate },
                     { Slot.MainHand, EquipmentCatalog.Hands.Longsword },
-                    { Slot.OffHand, EquipmentCatalog.Hands.BareHand },
-                    { Slot.Charm1, EquipmentCatalog.Charms.None },
+                    { Slot.OffHand, EquipmentCatalog.Hands.TwoHanding },
+                    { Slot.Charm1, EquipmentCatalog.Charms.LoversLocket },
                     { Slot.Charm2, EquipmentCatalog.Charms.None }
                 },
                 StartingSkills = new Dictionary<int, string>()
@@ -63,8 +60,7 @@ namespace Game
 
                 }
             };
-            var json = JsonConvert.SerializeObject(prof);
-            Console.Write("");
+            ProfDAO.AddOrUpdateProfession(prof);
         }
     }
 }

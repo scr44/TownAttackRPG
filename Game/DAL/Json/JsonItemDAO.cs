@@ -43,19 +43,35 @@ namespace Game.DAL.Json
                 return searchResults[0];
             }
         }
-        public void AddItemToCatalog(Item newItem)
+        public void AddOrUpdateItem(Item newItem)
         {
-            var updatedCatalog = itemCatalog;
+            var updatedCatalog = GetItemCatalog();
+            foreach (var item in updatedCatalog.ToList())
+            {
+                if (item.id == newItem.id)
+                {
+                    updatedCatalog.Remove(item);
+                }
+            }
             updatedCatalog.Add(newItem);
+            updatedCatalog.Sort((x, y) => string.Compare(x.id, y.id));
             File.WriteAllText(jsonLibraryPath + "/items.json",
-                JsonConvert.SerializeObject(updatedCatalog));
+                JsonConvert.SerializeObject(updatedCatalog,Formatting.Indented));
         }
-        public void AddEquipmentToCatalog(EquipmentItem newItem)
+        public void AddOrUpdateEquipment(EquipmentItem newEquipment)
         {
-            var updatedCatalog = equipmentCatalog;
-            updatedCatalog.Add(newItem);
+            var updatedCatalog = GetEquipmentCatalog();
+            foreach (var item in updatedCatalog.ToList())
+            {
+                if (item.id == newEquipment.id)
+                {
+                    updatedCatalog.Remove(item);
+                }
+            }
+            updatedCatalog.Add(newEquipment);
+            updatedCatalog.Sort((x, y) => string.Compare(x.id, y.id));
             File.WriteAllText(jsonLibraryPath + "/equipment.json",
-                JsonConvert.SerializeObject(equipmentCatalog.Add(newItem)));
+                JsonConvert.SerializeObject(updatedCatalog,Formatting.Indented));
         }
         public List<Item> GetItemCatalog()
         {

@@ -18,10 +18,10 @@ namespace Game.Objects.Actors
         // TODO: Dependency Injection
         IItemDAO ItemDAO { get; set; } = new JsonItemDAO();
         IProfessionDAO ProfessionDAO { get; set; } = new JsonProfessionDAO();
-        public Character(string name, string gender, string profession)
+        public Character(string name, string gender, string professionId)
             : base(name, gender)
         {
-            Profession = ProfessionDAO.GetProfession(profession);
+            Profession = ProfessionDAO.GetProfession(professionId);
             if (gender != Profession.DefaultGender)
             {
                 Profession.SwapDescriptions();
@@ -57,7 +57,7 @@ namespace Game.Objects.Actors
                 }
                 catch (InvalidSlotException)
                 {
-                    continue;
+                    Inventory.Items.RemoveAt(0);
                 }
             }
             foreach (var kvp in Profession.StartingInventory)

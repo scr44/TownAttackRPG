@@ -26,7 +26,6 @@ namespace Fixtures
         [TestMethod]
         public void Bad_prof_request_throws_exception()
         {
-            Assert.AreEqual(Knight.Title, Prof.Knight);
             try
             {
                 ProfessionDAO.GetProfession("Fake Profession Title");

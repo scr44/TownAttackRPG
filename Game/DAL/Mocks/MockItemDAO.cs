@@ -4,7 +4,6 @@ using Game.Objects.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static Game.Constants.Tags;
 
 namespace Game.DAL.Mocks
 {
@@ -33,12 +32,12 @@ namespace Game.DAL.Mocks
                 MaxDurability = 100,
                 ValidSlots = new List<string>()
                 {
-                    ValidSlots.MainHand
+                    Tags.ValidSlots.MainHand
                 },
                 Tags = new List<string>()
                 {
-                    Equipment.Weapons.Weapon,
-                    Equipment.Weapons.Sword
+                    Tags.Equipment.Weapons.Weapon,
+                    Tags.Equipment.Weapons.Sword
                 },
                 AttackMod = new Dictionary<string, double>()
                 {
@@ -59,6 +58,11 @@ namespace Game.DAL.Mocks
             };
             newItem.Durability = newItem.MaxDurability;
             return newItem;
+        }
+
+        Objects.Items.Item IItemDAO.GetItem(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Game.Objects.Professions
 {
     public class Profession
     {
+        public string id { get; set; }
         public string DefaultGender { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -15,7 +16,7 @@ namespace Game.Objects.Professions
         public Dictionary<string, int> StartingAttributes { get; set; }
         public Dictionary<string, int> StartingTalents { get; set; }
 
-        public Dictionary<string, double> StartingVitals { get; set;}
+        public Dictionary<string, int> StartingVitals { get; set;}
         public Dictionary<string, int> StartingInventory { get; set;}
         public Dictionary<string, string> StartingEquipment { get; set;}
         public Dictionary<int, string> StartingSkills { get; set;}

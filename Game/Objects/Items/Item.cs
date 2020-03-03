@@ -13,7 +13,6 @@ namespace Game.Objects.Items
         public string Description { get; set; }
         public int Value { get; set; }
         public double Weight { get; set; }
-        public List<string> ValidSlots { get; set; }
         public List<string> Tags { get; set; }
     }
 }

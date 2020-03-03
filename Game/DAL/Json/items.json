@@ -1,3 +1,21 @@
-{
-
-}
+[
+  {
+    "id": "Junk",
+    "Name": "Junk",
+    "Description": "Useless detritus. Maybe you can pawn this off on someone gullible.",
+    "Value": 1,
+    "Weight": 0.1,
+    "Tags": []
+  },
+  {
+    "id": "Small Healing Elixir",
+    "Name": "Small Healing Elixir",
+    "Description": "A small vial filled with a healing elixir. Restores minor health.",
+    "Value": 20,
+    "Weight": 0.1,
+    "Tags": [
+      "Elixir",
+      "Healing Item"
+    ]
+  }
+]

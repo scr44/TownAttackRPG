@@ -1,3 +1,140 @@
 [
-
+  {
+    "ValidSlots": [
+      "Main Hand",
+      "Off Hand"
+    ],
+    "AttackMod": {
+      "Crushing": 0.2
+    },
+    "DefenseMod": {},
+    "BlockChance": 0.0,
+    "Durability": 0.0,
+    "MaxDurability": 0.0,
+    "id": "Bare Hand",
+    "Name": "Bare Hand",
+    "Description": "An empty hand. Can punch or throw things.",
+    "Value": 0,
+    "Weight": 0.0,
+    "Tags": [
+      "Unarmed"
+    ]
+  },
+  {
+    "ValidSlots": [
+      "Body"
+    ],
+    "AttackMod": {},
+    "DefenseMod": {
+      "Slashing": 0.7,
+      "Piercing": 0.3,
+      "Crushing": 0.5
+    },
+    "BlockChance": 0.2,
+    "Durability": 200.0,
+    "MaxDurability": 200.0,
+    "id": "Full Plate Armor",
+    "Name": "Full Plate Armor",
+    "Description": "Heavy metal armor. A suit of well-fitted plate mail. Nearly impervious to slashing weapons, but vulnerable to precise stabs at the joints and heavy blows from crushing weapons.",
+    "Value": 1000,
+    "Weight": 25.0,
+    "Tags": [
+      "Heavy",
+      "Metal",
+      "Armor"
+    ]
+  },
+  {
+    "ValidSlots": [
+      "Main Hand"
+    ],
+    "AttackMod": {
+      "Slashing": 1.5,
+      "Piercing": 1.5,
+      "Crushing": 1.5
+    },
+    "DefenseMod": {},
+    "BlockChance": 0.15,
+    "Durability": 50.0,
+    "MaxDurability": 50.0,
+    "id": "Longsword",
+    "Name": "Longsword",
+    "Description": "A versatile weapon. Can swiftly pierce and slash, and advanced techniques permit devastating crushing attacks.",
+    "Value": 100,
+    "Weight": 5.0,
+    "Tags": [
+      "Weapon",
+      "Sword"
+    ]
+  },
+  {
+    "ValidSlots": [
+      "Charm"
+    ],
+    "AttackMod": {},
+    "DefenseMod": {},
+    "BlockChance": 0.0,
+    "Durability": 0.0,
+    "MaxDurability": 0.0,
+    "id": "Lover's Locket",
+    "Name": "Lover's Locket",
+    "Description": "The portrait of a loved one contained within spurs the knight on to deeds of greater heroism.",
+    "Value": 20,
+    "Weight": 0.5,
+    "Tags": [
+      "Jewelry"
+    ]
+  },
+  {
+    "ValidSlots": [
+      "Body"
+    ],
+    "AttackMod": {},
+    "DefenseMod": {},
+    "BlockChance": 0.0,
+    "Durability": 0.0,
+    "MaxDurability": 0.0,
+    "id": "Naked",
+    "Name": "Naked",
+    "Description": "Your birthday suit. Protects nothing, not even your modesty.",
+    "Value": 0,
+    "Weight": 0.0,
+    "Tags": [
+      "Naked"
+    ]
+  },
+  {
+    "ValidSlots": [
+      "Charm"
+    ],
+    "AttackMod": {},
+    "DefenseMod": {},
+    "BlockChance": 0.0,
+    "Durability": 0.0,
+    "MaxDurability": 0.0,
+    "id": "None",
+    "Name": "None",
+    "Description": "No charms equipped in this slot.",
+    "Value": 0,
+    "Weight": 0.0,
+    "Tags": []
+  },
+  {
+    "ValidSlots": [
+      "Off Hand"
+    ],
+    "AttackMod": {},
+    "DefenseMod": {},
+    "BlockChance": 0.0,
+    "Durability": 0.0,
+    "MaxDurability": 0.0,
+    "id": "Two-handing",
+    "Name": "Two-handing",
+    "Description": "This character is using their main weapon with both hands.",
+    "Value": 0,
+    "Weight": 0.0,
+    "Tags": [
+      "Unarmed"
+    ]
+  }
 ]

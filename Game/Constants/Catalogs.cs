@@ -6,14 +6,12 @@ namespace Game.Constants
 {
     public static class ItemCatalog
     {
-        public static readonly string TestItem = "Test Item";
-
         public static class Consumables
         {
-
+            public static readonly string HealingElixerSmall = "Small Healing Elixir";
         }
 
-        public static class VendorTrash
+        public static class Misc
         {
             public static readonly string Junk = "Junk";
         }
@@ -24,6 +22,7 @@ namespace Game.Constants
         public static class Body
         {
             public static readonly string Naked = "Naked";
+            public static readonly string FullPlate = "Full Plate Armor";
         }
         public static class Hands
         {
@@ -34,6 +33,7 @@ namespace Game.Constants
         public static class Charms
         {
             public static readonly string None = "None";
+            public static readonly string LoversLocket = "Lover's Locket";
         }
     }
 }

@@ -14,14 +14,11 @@ namespace Game.DAL.Json
     {
         readonly string path = "../../../../Game/DAL/Json/professions.json";
 
-        public Profession GetProfession(string title)
+        public Profession GetProfession(string id)
         {
-            using (StreamReader sr = new StreamReader(path))
-            {
-                string jsonData = sr.ReadToEnd();
-                List<Profession> professionCatalog = JsonConvert.DeserializeObject<List<Profession>>(jsonData);
-                var searchResults = (from p in professionCatalog
-                                        where (p.Title == title || p.AltGenderTitle == title)
+            var professionCatalog = GetProfessionCatalog();
+            var searchResults = (from p in professionCatalog
+                                        where (p.id == id)
                                         select p).ToList();
                 if (searchResults.Count == 0)
                 {
@@ -31,6 +28,29 @@ namespace Game.DAL.Json
                 {
                     return searchResults[0];
                 }
+        }
+
+        public void AddOrUpdateProfession(Profession newProf)
+        {
+            var professionCatalog = GetProfessionCatalog();
+            foreach (var prof in professionCatalog)
+            {
+                if (prof.id == newProf.id)
+                {
+                    professionCatalog.Remove(prof);
+                }
+            }
+            professionCatalog.Add(newProf);
+            professionCatalog.Sort((x, y) => string.Compare(x.id, y.id));
+            File.WriteAllText(path, JsonConvert.SerializeObject(professionCatalog, Formatting.Indented));
+        }
+
+        public List<Profession> GetProfessionCatalog()
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                string jsonData = sr.ReadToEnd();
+                return JsonConvert.DeserializeObject<List<Profession>>(jsonData);
             }
         }
     }

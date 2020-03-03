@@ -37,7 +37,7 @@ namespace Game.DAL.Mocks
                     { Tal.Engineering, 0 },
                     { Tal.History, 0 }
                 },
-                StartingVitals = new Dictionary<string, double>()
+                StartingVitals = new Dictionary<string, int>()
                 {
                     { Vitals.HP, 10 },
                     { Vitals.SP, 10 },
@@ -46,7 +46,7 @@ namespace Game.DAL.Mocks
                 },
                 StartingInventory = new Dictionary<string, int>()
                 {
-                    { ItemCatalog.VendorTrash.Junk, 2 }
+                    { ItemCatalog.Misc.Junk, 2 }
                 },
                 StartingEquipment = new Dictionary<string, string>()
                 {

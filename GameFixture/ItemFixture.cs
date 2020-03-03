@@ -14,7 +14,6 @@ namespace Fixtures
         [TestInitialize]
         public void Create_items()
         {
-            TestItem = ItemDAO.GetItem(ItemCatalog.TestItem);
         }
 
         [TestMethod]

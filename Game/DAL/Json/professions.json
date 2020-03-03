@@ -1,10 +1,11 @@
 [
   {
-    "Title": "Knight",
+    "id": "Knight",
     "DefaultGender": "Male",
+    "Title": "Hedge Knight",
     "Description": "A sturdy knight in plate armor.",
-    "AltGenderTitle": "Female Knight",
-    "AltGenderDescription": "A female knight in plate armor.",
+    "AltGenderTitle": "Noble's Daughter",
+    "AltGenderDescription": "The daughter of a noble, who preferred swords to knitting needles.",
     "StartingAttributes": {
       "STR": 5,
       "DEX": 5,
@@ -14,27 +15,24 @@
       "CHA": 5
     },
     "StartingTalents": {
-      "Medicine": 0,
-      "Explosives": 0,
-      "Veterancy": 0,
-      "Bestiary": 0,
-      "Engineering": 0,
-      "History": 0
+      "Veterancy": 1
     },
     "StartingVitals": {
-      "Base HP": 10.0,
-      "Base SP": 10.0,
-      "Base HP Regen": 0.0,
-      "Base SP Regen": 5.0
+      "Base HP": 10,
+      "Base SP": 10,
+      "Base HP Regen": 0,
+      "Base SP Regen": 5
     },
-    "StartingInventory": { "Junk": 2 },
+    "StartingInventory": {
+      "Small Healing Elixir": 3
+    },
     "StartingEquipment": {
-      "Body": "Naked",
+      "Body": "Full Plate Armor",
       "Main Hand": "Longsword",
-      "Off Hand": "Bare Hand",
-      "Charm 1": "None",
+      "Off Hand": "Two-handing",
+      "Charm 1": "Lover's Locket",
       "Charm 2": "None"
     },
     "StartingSkills": {}
-  },
+  }
 ]

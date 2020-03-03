@@ -13,4 +13,5 @@ namespace Game.DAL.Interfaces
 
     public class InvalidItemException : Exception { }
     public class InvalidEquipmentItemException : Exception { }
+    public class ItemIdAlreadyInUseException : Exception { }
 }
