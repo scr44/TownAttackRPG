@@ -13,14 +13,14 @@ using Game.DAL.Json;
 
 namespace Game.Objects.Actors
 {
-    public class Character : Actor, IChangeEquipment
+    public class Character : Actor, IEquipmentManagement
     {
         // TODO: Dependency Injection
-        IItemDAO ItemDAO { get; set; } = new JsonItemDAO();
         IProfessionDAO ProfessionDAO { get; set; } = new JsonProfessionDAO();
         public Character(string name, string gender, string professionId)
-            : base(name, gender)
+            : base(name)
         {
+            Gender = gender;
             Profession = ProfessionDAO.GetProfession(professionId);
             if (gender != Profession.DefaultGender)
             {
@@ -39,34 +39,22 @@ namespace Game.Objects.Actors
                 SP = (int)Profession.StartingVitals[Vitals.SP],
                 SPRegen = (int)Profession.StartingVitals[Vitals.SPRegen]
             };
-
             EquipmentSlots = new Dictionary<string, EquipmentItem>()
             {
-                { Slot.Body, ItemDAO.GetEquipment(EquipmentCatalog.Body.Naked) },
-                { Slot.MainHand, ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand) },
-                { Slot.OffHand, ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand) },
-                { Slot.Charm1, ItemDAO.GetEquipment(EquipmentCatalog.Charms.None) },
-                { Slot.Charm2, ItemDAO.GetEquipment(EquipmentCatalog.Charms.None) }
+                { Slot.Body, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.Body]) },
+                { Slot.MainHand, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.MainHand]) },
+                { Slot.OffHand, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.OffHand]) },
+                { Slot.Charm1, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.Charm1]) },
+                { Slot.Charm2, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.Charm2]) }
             };
-            foreach (var kvp in Profession.StartingEquipment)
-            {
-                Inventory.AddItem(ItemDAO.GetEquipment(kvp.Value));
-                try
-                {
-                    Equip(kvp.Key, (EquipmentItem)Inventory.Items[0]);
-                }
-                catch (InvalidSlotException)
-                {
-                    Inventory.Items.RemoveAt(0);
-                }
-            }
             foreach (var kvp in Profession.StartingInventory)
             {
                 for (int i = 0; i < kvp.Value; i++)
                 {
-                    Inventory.AddItem(ItemDAO.GetEquipment(kvp.Key));
+                    Inventory.AddItem(ItemDAO.GetItem(kvp.Key));
                 }
             }
+            // Fill vitals to max after equipment bonuses are set
             HP = MaxHP;
             SP = MaxSP;
         }
@@ -100,7 +88,6 @@ namespace Game.Objects.Actors
             }
         }
 
-        public Inventory Inventory { get; protected set; } = new Inventory();
         public Dictionary<string, EquipmentItem> EquipmentSlots { get; private set; }
         bool IsTwoHanding => EquipmentSlots[Slot.OffHand].Name == EquipmentCatalog.Hands.TwoHanding;
         
@@ -174,8 +161,11 @@ namespace Game.Objects.Actors
             }
         }
 
-        Dictionary<string, double> EquipmentModifiers { get; set; } = new Dictionary<string, double>();
-        public override double GetModifier(string stat)
+        public double GetEquipmentModifier(string stat)
+        {
+
+        }
+        public override double GetNetModifier(string stat)
         {
             double totalMod = 0;
             if (EquipmentModifiers.TryGetValue(stat, out double equipMod))

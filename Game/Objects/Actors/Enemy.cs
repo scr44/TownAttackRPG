@@ -10,7 +10,7 @@ namespace Game.Objects.Actors
         {
 
         }
-        public override double GetModifier(string stat)
+        public override double GetNetModifier(string stat)
         {
             throw new NotImplementedException();
         }

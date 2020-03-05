@@ -1,6 +1,9 @@
 ﻿using Game.Constants;
+using Game.DAL.Interfaces;
+using Game.DAL.Json;
 using Game.Objects.Actors.VitalsClasses;
 using Game.Objects.Actors.VitalsInterfaces;
+using Game.Objects.Items.InventoryAndEquipment;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,27 +12,27 @@ namespace Game.Objects.Actors
 {
     public abstract class Actor : IDamage, IStaminaUsage
     {
-        public Actor(string name, string gender)
+        protected IItemDAO ItemDAO { get; set; } = new JsonItemDAO();
+
+        public Actor(string name)
         {
             Name = name;
-            Gender = gender;
         }
 
         public string Name { get; protected set; }
-        public string Gender { get; protected set; } // TODO: add pronouns for string interpolation
+        public string Gender { get; protected set; } = Constants.Gender.Male; // TODO: add pronouns for string interpolation
         public string Race { get; protected set; } = Constants.Race.Human;
 
-        public Dictionary<string, double> EffectModifiers { get; set; } = new Dictionary<string, double>();
-        public abstract double GetModifier(string stat);
+        public abstract double GetNetModifier(string stat);
 
         public Health BaseHealth { get; protected set; }
         public int HP { get; set; }
-        public int MaxHP => BaseHealth.HP + (int)GetModifier(Vitals.MaxHP);
+        public int MaxHP => BaseHealth.HP + (int)GetNetModifier(Vitals.MaxHP);
         public double PercentHP => Math.Round(((HP / (double)MaxHP * 100)));
 
         public Stamina BaseStamina { get; protected set; }
         public int SP { get; set; }
-        public int MaxSP => BaseStamina.SP + (int)GetModifier(Vitals.MaxSP);
+        public int MaxSP => BaseStamina.SP + (int)GetNetModifier(Vitals.MaxSP);
         public double PercentSP => Math.Round((SP / (double)MaxSP), 2) * 100;
 
         public void AdjustHP(int points)
@@ -82,6 +85,8 @@ namespace Game.Objects.Actors
         {
             throw new NotImplementedException();
         }
+
+        public Inventory Inventory { get; protected set; } = new Inventory();
 
         // TODO: Skillbar
         // TODO: Active Effects

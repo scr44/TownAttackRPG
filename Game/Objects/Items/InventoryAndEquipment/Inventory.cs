@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game.Objects.Items.InventoryAndEquipment
 {
-    public class Inventory : IMoveItems
+    public class Inventory : IItemManagement
     {
         public List<Item> Items { get; private set; } = new List<Item>();
         public Dictionary<string, int> ItemCounts
@@ -28,7 +28,6 @@ namespace Game.Objects.Items.InventoryAndEquipment
         {
             throw new NotImplementedException();
         }
-
         public void AddItem(Item item)
         {
             Items.Add(item);

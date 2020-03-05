@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Game.Objects.Items.InventoryAndEquipment
 {
-    public interface IMoveItems
+    public interface IItemManagement
     {
         public void AddItem(Item item);
         public void RemoveItem(Item item);
     }
 
-    public interface IChangeEquipment
+    public interface IEquipmentManagement
     {
         public void Equip(string slot, EquipmentItem item);
         public void Unequip(string slot);
