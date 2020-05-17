@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Constants
+namespace GameCore.Constants
 {
     public static class Tags
     {
@@ -15,42 +15,37 @@ namespace Game.Constants
         }
         public static class Elements
         {
-            public static readonly string Fire = "Fire";
-            public static readonly string Poison = "Poison";
+            public const string Fire = "Fire";
+            public const string Poison = "Poison";
         }
         public static class Equipment
         {
+            public const string EmptySlot = "Empty Slot";
+
             public static class Weapons
             {
-                public static readonly string Weapon = "Weapon";
-                public static readonly string Sword = "Sword";
-                public static readonly string Shield = "Shield";
-                public static readonly string Unarmed = "Unarmed";
+                public const string Weapon = "Weapon";
+                public const string Sword = "Sword";
+                public const string Shield = "Shield";
+                public const string FreeHand = "Free Hand";
             }
 
             public static class Armors
             {
-                public static readonly string Naked = "Naked";
-                public static readonly string Armor = "Armor";
-                public static readonly string Heavy = "Heavy";
-                public static readonly string Light = "Light";
-                public static readonly string Metal = "Metal";
-                public static readonly string Padded = "Padded";
-                public static readonly string Jewelry = "Jewelry";
+                public const string Naked = "Naked";
+                public const string Armor = "Armor";
+                public const string Heavy = "Heavy";
+                public const string Light = "Light";
+                public const string Metal = "Metal";
+                public const string Padded = "Padded";
+                public const string Jewelry = "Jewelry";
             }
-        }
-        public static class ValidSlots
-        {
-            public static readonly string Body = "Body";
-            public static readonly string MainHand = "Main Hand";
-            public static readonly string OffHand = "Off Hand";
-            public static readonly string Charm = "Charm";
         }
         public static class Restrictions
         {
-            public static readonly string MustTwoHand = "Must be Two-Handed";
-            public static readonly string CannotTwoHand = "Cannot be Two-Handed";
-            public static readonly string CannotDualWield = "Cannot be Dual Wielded";
+            public const string MustTwoHand = "Must be Two-Handed";
+            public const string CannotTwoHand = "Cannot be Two-Handed";
+            public const string CannotDualWield = "Cannot be Dual Wielded";
         }
         public static class Races
         {
@@ -60,17 +55,17 @@ namespace Game.Constants
         {
             public static class Consumable
             {
-                public static readonly string Elixir = "Elixir";
-                public static readonly string WeaponOil = "Weapon Oil";
-                public static readonly string Bomb = "Bomb";
-                public static readonly string Healing = "Healing Item";
+                public const string Elixir = "Elixir";
+                public const string WeaponOil = "Weapon Oil";
+                public const string Bomb = "Bomb";
+                public const string Healing = "Healing Item";
             }
 
             public static class FlavorText
             {
-                public static readonly string Relic = "Relic";
-                public static readonly string Keepsake = "Keepsake";
-                public static readonly string Heirloom = "Heirloom";
+                public const string Relic = "Relic";
+                public const string Keepsake = "Keepsake";
+                public const string Heirloom = "Heirloom";
             }
         }
     }

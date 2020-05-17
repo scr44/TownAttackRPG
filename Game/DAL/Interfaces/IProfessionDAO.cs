@@ -1,10 +1,10 @@
-﻿using Game.Objects.Items;
-using Game.Objects.Professions;
+﻿using GameCore.Objects.Items;
+using GameCore.Objects.Professions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.DAL.Interfaces
+namespace GameCore.DAL.Interfaces
 {
     public interface IProfessionDAO
     {

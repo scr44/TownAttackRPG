@@ -1,35 +1,40 @@
-﻿using Game.Constants;
-using Game.Objects.Actors.VitalsClasses;
-using Game.Objects.Actors.VitalsInterfaces;
+﻿using GameCore.Constants;
+using GameCore.DAL.Interfaces;
+using GameCore.DAL.Json;
+using GameCore.Objects.Actors.VitalsClasses;
+using GameCore.Objects.Actors.VitalsInterfaces;
+using GameCore.Objects.Effects;
+using GameCore.Objects.Items.InventoryAndEquipment;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace Game.Objects.Actors
+namespace GameCore.Objects.Actors
 {
-    public abstract class Actor : IDamage, IStaminaUsage
+    public abstract class Actor : IDamage, IStaminaUsage, IEffectManagement
     {
-        public Actor(string name, string gender)
+        protected IItemDAO ItemDAO => new JsonItemDAO();
+
+        public Actor(string name)
         {
             Name = name;
-            Gender = gender;
         }
 
         public string Name { get; protected set; }
-        public string Gender { get; protected set; } // TODO: add pronouns for string interpolation
+        public string Gender { get; protected set; } = Constants.Gender.Male; // TODO: add pronouns for string interpolation
         public string Race { get; protected set; } = Constants.Race.Human;
 
-        public Dictionary<string, double> EffectModifiers { get; set; } = new Dictionary<string, double>();
-        public abstract double GetModifier(string stat);
+        public abstract double Modifier(string stat);
 
-        public Health BaseHealth { get; protected set; }
+        public Health Health { get; protected set; }
         public int HP { get; set; }
-        public int MaxHP => BaseHealth.HP + (int)GetModifier(Vitals.MaxHP);
-        public double PercentHP => Math.Round(((HP / (double)MaxHP * 100)));
+        public int MaxHP => Health.MaxHP + (int)Modifier(Vitals.MaxHP);
+        public double PercentHP => Math.Round((HP / (double)MaxHP * 100));
 
-        public Stamina BaseStamina { get; protected set; }
+        public Stamina Stamina { get; protected set; }
         public int SP { get; set; }
-        public int MaxSP => BaseStamina.SP + (int)GetModifier(Vitals.MaxSP);
+        public int MaxSP => Stamina.MaxSP + (int)Modifier(Vitals.MaxSP);
         public double PercentSP => Math.Round((SP / (double)MaxSP), 2) * 100;
 
         public void AdjustHP(int points)
@@ -48,19 +53,37 @@ namespace Game.Objects.Actors
         {
             SP += points;
         }
-        public void Damage(double dmgAmt, string dmgType, double dmgAP = 0)
+        public void Damage(double dmgAmt, string dmgType, double dmgArmorPiercing = 0)
         {
-            throw new NotImplementedException();
+            var typeDef = dmgType + "DEF";
+            var dmgDef = Modifier(typeDef);
+            var dmgUnblocked = dmgAmt * (1 - dmgDef);
+            double dmgArmorIgnoring = 0;
+            if (dmgDef > 0)
+            {
+                var dmgBlocked = (dmgAmt - dmgUnblocked);
+                dmgArmorIgnoring = dmgBlocked - dmgArmorPiercing > 0 ? dmgArmorPiercing : dmgBlocked;
+            }
+            int totalDmg = (int)(
+                (dmgUnblocked + dmgArmorIgnoring) * 
+                    (1 + Modifier(Constants.Effects.Debuffs.PercentIncreaseDamageTaken) 
+                    - Modifier(Constants.Effects.Buffs.PercentDecreaseDamageTaken))
+                );
+            AdjustHP(-1 * totalDmg);
         }
         public void Heal(double healAmt)
         {
-            throw new NotImplementedException();
+            int healTotal = (int)(
+                healAmt * (1 + Modifier(Constants.Effects.Buffs.PercentHealingBonus) - Modifier(Constants.Effects.Debuffs.PercentHealingPenalty)) 
+                + Modifier(Constants.Effects.Buffs.FlatHealingBonus) - Modifier(Constants.Effects.Debuffs.FlatHealingPenalty));
+            AdjustHP(healTotal);
         }
         public bool IsAlive { get; set; } = true;
         public void Kill()
         {
             HP = 0;
             IsAlive = false;
+            // TODO: remove all active effects
         }
         public void Revive(int hp)
         {
@@ -83,8 +106,49 @@ namespace Game.Objects.Actors
             throw new NotImplementedException();
         }
 
+        public Inventory Inventory { get; protected set; } = new Inventory();
+
+        public List<Effect> ActiveEffects { get; private set; } = new List<Effect>();
+        public void ApplyEffect(Effect effect)
+        {
+            var activeInstances = ActiveEffects.Where(x => x.id == effect.id).ToList<Effect>();
+            if (effect.Refreshes && activeInstances.Count > 0)
+            {
+                activeInstances[0].Refresh();
+            }
+            else if (!effect.Stacks && activeInstances.Count > 0)
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                ActiveEffects.Add(effect);
+                ActiveEffects[ActiveEffects.Count - 1].WhenApplied();
+            }
+        }
+        public void RemoveEffect(int index)
+        {
+            ActiveEffects[index].WhenRemoved();
+            ActiveEffects.RemoveAt(index);
+        }
+        public void TickEffects()
+        {
+            foreach (var effect in ActiveEffects)
+            {
+                effect.Tick();
+            }
+
+            for (int i = ActiveEffects.Count - 1; i >= 0; i--)
+            {
+                if (ActiveEffects[i].Duration == 0)
+                {
+                    ActiveEffects[i].WhenExpired();
+                    ActiveEffects.RemoveAt(i);
+                }
+            }
+        }
+
         // TODO: Skillbar
-        // TODO: Active Effects
         // TODO: RewardDrops (XP, Loot)
 
     }

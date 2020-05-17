@@ -4,11 +4,13 @@
       "Main Hand",
       "Off Hand"
     ],
+    "StatReqs": {},
     "AttackMod": {
-      "Crushing": 0.2
+      "Crushing": 0.25
     },
     "DefenseMod": {},
-    "BlockChance": 0.0,
+    "CharmMod": {},
+    "Effects": {},
     "Durability": 0.0,
     "MaxDurability": 0.0,
     "id": "Bare Hand",
@@ -17,25 +19,33 @@
     "Value": 0,
     "Weight": 0.0,
     "Tags": [
-      "Unarmed"
+      "Empty Slot",
+      "Free Hand",
+      "Cannot be Two-Handed"
     ]
   },
   {
     "ValidSlots": [
       "Body"
     ],
+    "StatReqs": {
+      "STR": 6,
+      "FOR": 6
+    },
     "AttackMod": {},
     "DefenseMod": {
-      "Slashing": 0.7,
-      "Piercing": 0.3,
-      "Crushing": 0.5
+      "SlashingDEF": 0.8,
+      "PiercingDEF": 0.3,
+      "CrushingDEF": 0.5
     },
-    "BlockChance": 0.2,
+    "CharmMod": {},
+    "Effects": {},
     "Durability": 200.0,
     "MaxDurability": 200.0,
+    
     "id": "Full Plate Armor",
     "Name": "Full Plate Armor",
-    "Description": "Heavy metal armor. A suit of well-fitted plate mail. Nearly impervious to slashing weapons, but vulnerable to precise stabs at the joints and heavy blows from crushing weapons.",
+    "Description": "Heavy metal armor. A suit of well-fitted plate mail. Nearly impervious to slashing attacks, but vulnerable to precise stabs at the joints and heavy blows from crushing weapons.",
     "Value": 1000,
     "Weight": 25.0,
     "Tags": [
@@ -46,21 +56,28 @@
   },
   {
     "ValidSlots": [
-      "Main Hand"
+      "Main Hand",
+      "Off Hand"
     ],
+    "StatReqs": {
+      "STR": 6,
+      "DEX": 6
+    },
     "AttackMod": {
-      "Slashing": 1.5,
-      "Piercing": 1.5,
-      "Crushing": 1.5
+      "SlashingATK": 1.5,
+      "PiercingATK": 1.5,
+      "CrushingATK": 1.5
     },
     "DefenseMod": {},
-    "BlockChance": 0.15,
-    "Durability": 50.0,
-    "MaxDurability": 50.0,
+    "CharmMod": {},
+    "Effects": {},
+    "Durability": 100.0,
+    "MaxDurability": 100.0,
+    "ParryChance": 0.1,
     "id": "Longsword",
     "Name": "Longsword",
-    "Description": "A versatile weapon. Can swiftly pierce and slash, and advanced techniques permit devastating crushing attacks.",
-    "Value": 100,
+    "Description": "A versatile weapon. Can swiftly pierce and slash, and advanced techniques permit devastating crushing attacks with the crossguard.",
+    "Value": 200,
     "Weight": 5.0,
     "Tags": [
       "Weapon",
@@ -71,11 +88,15 @@
     "ValidSlots": [
       "Charm"
     ],
+    "StatReqs": {},
     "AttackMod": {},
     "DefenseMod": {},
-    "BlockChance": 0.0,
-    "Durability": 0.0,
-    "MaxDurability": 0.0,
+    "CharmMod": {
+      "STR": 1.0
+    },
+    "Effects": {},
+    "Durability": 50.0,
+    "MaxDurability": 50.0,
     "id": "Lover's Locket",
     "Name": "Lover's Locket",
     "Description": "The portrait of a loved one contained within spurs the knight on to deeds of greater heroism.",
@@ -89,9 +110,11 @@
     "ValidSlots": [
       "Body"
     ],
+    "StatReqs": {},
     "AttackMod": {},
     "DefenseMod": {},
-    "BlockChance": 0.0,
+    "CharmMod": {},
+    "Effects": {},
     "Durability": 0.0,
     "MaxDurability": 0.0,
     "id": "Naked",
@@ -100,16 +123,18 @@
     "Value": 0,
     "Weight": 0.0,
     "Tags": [
-      "Naked"
+      "Empty Slot"
     ]
   },
   {
     "ValidSlots": [
       "Charm"
     ],
+    "StatReqs": {},
     "AttackMod": {},
     "DefenseMod": {},
-    "BlockChance": 0.0,
+    "CharmMod": {},
+    "Effects": {},
     "Durability": 0.0,
     "MaxDurability": 0.0,
     "id": "None",
@@ -117,15 +142,19 @@
     "Description": "No charms equipped in this slot.",
     "Value": 0,
     "Weight": 0.0,
-    "Tags": []
+    "Tags": [
+      "Empty Slot"
+    ]
   },
   {
     "ValidSlots": [
       "Off Hand"
     ],
+    "StatReqs": {},
     "AttackMod": {},
     "DefenseMod": {},
-    "BlockChance": 0.0,
+    "CharmMod": {},
+    "Effects": {},
     "Durability": 0.0,
     "MaxDurability": 0.0,
     "id": "Two-handing",
@@ -133,8 +162,6 @@
     "Description": "This character is using their main weapon with both hands.",
     "Value": 0,
     "Weight": 0.0,
-    "Tags": [
-      "Unarmed"
-    ]
+    "Tags": []
   }
 ]

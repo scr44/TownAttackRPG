@@ -1,9 +1,9 @@
-﻿using Game.Objects.Items;
+﻿using GameCore.Objects.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.DAL.Interfaces
+namespace GameCore.DAL.Interfaces
 {
     public interface IItemDAO
     {

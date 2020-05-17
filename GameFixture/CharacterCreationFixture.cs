@@ -1,15 +1,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Game.Constants;
-using Game.Objects.Actors;
-using Game.Objects.Professions;
-using Game.DAL.Interfaces;
-using Game.DAL.Mocks;
-using Game.DAL.Json;
+using GameCore.Constants;
+using GameCore.Objects.Actors;
+using GameCore.Objects.Professions;
+using GameCore.DAL.Interfaces;
+using GameCore.DAL.Mocks;
+using GameCore.DAL.Json;
 
-namespace Fixtures
+namespace CharacterFixture
 {
     [TestClass]
-    public class CharacterFixture
+    public class CharacterCreation
     {
         IProfessionDAO ProfessionDAO { get; set; } = new JsonProfessionDAO();
         Character Guinevere { get; set; }
@@ -23,6 +23,7 @@ namespace Fixtures
             Alric = new Character("Alric", Gender.Male, Prof.Knight);
             Knight = ProfessionDAO.GetProfession(Prof.Knight);
         }
+
         [TestMethod]
         public void Bad_prof_request_throws_exception()
         {
@@ -36,6 +37,7 @@ namespace Fixtures
                 Assert.IsTrue(true);
             }
         }
+        
         [TestMethod]
         public void Character_has_correct_description_properties()
         {
@@ -55,6 +57,7 @@ namespace Fixtures
             Assert.AreEqual(Knight.Title, Guinevere.Profession.AltGenderTitle);
             Assert.AreEqual(Knight.Description, Guinevere.Profession.AltGenderDescription);
         }
+        
         [TestMethod]
         public void Character_has_correct_starting_stats()
         {
@@ -62,9 +65,10 @@ namespace Fixtures
             CollectionAssert.AreEqual(Knight.StartingTalents, Guinevere.BaseTalents.Base);
             Assert.AreEqual(Knight.StartingVitals[Vitals.HP], Guinevere.HP);
             Assert.AreEqual(Knight.StartingVitals[Vitals.SP], Guinevere.SP);
-            Assert.AreEqual(Knight.StartingVitals[Vitals.HPRegen], Guinevere.BaseHealth.HPRegen);
-            Assert.AreEqual(Knight.StartingVitals[Vitals.SPRegen], Guinevere.BaseStamina.SPRegen);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.HPRegen], Guinevere.Health.HPRegen);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.SPRegen], Guinevere.Stamina.SPRegen);
         }
+        
         [TestMethod]
         public void Character_has_starting_items()
         {
@@ -74,6 +78,7 @@ namespace Fixtures
                 Assert.AreEqual(kvp.Value, Guinevere.Inventory.ItemCounts[kvp.Key]);
             }
         }
+        
         [TestMethod]
         public void Character_has_starting_equipment()
         {
@@ -81,6 +86,13 @@ namespace Fixtures
             {
                 Assert.AreEqual(Knight.StartingEquipment[kvp.Key], Guinevere.EquipmentSlots[kvp.Key].Name);
             }
+        }
+
+        [TestMethod]
+        public void Character_vitals_are_maxed()
+        {
+            Assert.AreEqual(Guinevere.MaxHP, Guinevere.HP);
+            Assert.AreEqual(Guinevere.MaxSP, Guinevere.SP);
         }
     }
 }
