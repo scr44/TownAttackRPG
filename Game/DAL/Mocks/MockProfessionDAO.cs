@@ -1,12 +1,12 @@
-﻿using Game.Constants;
-using Game.DAL.Interfaces;
-using Game.Objects.Items;
-using Game.Objects.Professions;
+﻿using GameCore.Constants;
+using GameCore.DAL.Interfaces;
+using GameCore.Objects.Items;
+using GameCore.Objects.Professions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.DAL.Mocks
+namespace GameCore.DAL.Mocks
 {
     public class MockProfessionDAO : IProfessionDAO
     {

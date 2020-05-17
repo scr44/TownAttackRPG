@@ -1,66 +1,60 @@
-﻿using Game.Constants;
-using Game.DAL.Interfaces;
-using Game.DAL.Json;
-using Game.Objects.Items;
-using Game.Objects.Professions;
+﻿using GameCore.Constants;
+using GameCore.DAL.Interfaces;
+using GameCore.DAL.Json;
+using GameCore.Objects.Effects;
+using GameCore.Objects.Items;
+using GameCore.Objects.Professions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game
+namespace GameCore
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var ProfDAO = new JsonProfessionDAO();
-            var prof = new Profession()
+            var ItemDAO = new JsonItemDAO();
+            var item = new EquipmentItem()
             {
-                id = Prof.Knight,
-                Title = "Hedge Knight",
-                DefaultGender = "Male",
-                Description = "A sturdy knight in plate armor.",
-                AltGenderTitle = "Noble's Daughter",
-                AltGenderDescription = "The daughter of a noble, who preferred swords to knitting needles.",
-                StartingAttributes = new Dictionary<string, int>()
+                id = EquipmentCatalog.Hands.TwoHanding,
+                Name = EquipmentCatalog.Hands.TwoHanding,
+                Description = "This character is using their main weapon with both hands.",
+                Value = 0,
+                Weight = 0.0,
+                MaxDurability = 0.0,
+                Durability = 0.0,
+                Tags = new List<string>() 
                 {
-                    { Att.STR, 5 },
-                    { Att.DEX, 5 },
-                    { Att.SKL, 5 },
-                    { Att.APT, 5 },
-                    { Att.FOR, 5 },
-                    { Att.CHA, 5 }
+
                 },
-                StartingTalents = new Dictionary<string, int>()
+                ValidSlots = new List<string>()
                 {
-                    { Tal.Veterancy, 1 }
+                    Slot.OffHand
                 },
-                StartingVitals = new Dictionary<string, int>()
+                StatReqs = new Dictionary<string, int>()
                 {
-                    { Vitals.HP, 10 },
-                    { Vitals.SP, 10 },
-                    { Vitals.HPRegen, 0 },
-                    { Vitals.SPRegen, 5 }
+                    
                 },
-                StartingInventory = new Dictionary<string, int>()
+                AttackMod = new Dictionary<string, double>()
                 {
-                    { ItemCatalog.Consumables.HealingElixerSmall, 3 }
+
                 },
-                StartingEquipment = new Dictionary<string, string>()
+                DefenseMod = new Dictionary<string, double>()
                 {
-                    { Slot.Body, EquipmentCatalog.Body.FullPlate },
-                    { Slot.MainHand, EquipmentCatalog.Hands.Longsword },
-                    { Slot.OffHand, EquipmentCatalog.Hands.TwoHanding },
-                    { Slot.Charm1, EquipmentCatalog.Charms.LoversLocket },
-                    { Slot.Charm2, EquipmentCatalog.Charms.None }
+                    
                 },
-                StartingSkills = new Dictionary<int, string>()
+                CharmMod = new Dictionary<string, double>()
+                {
+                    
+                },
+                Effects = new Dictionary<string, string>()
                 {
 
                 }
             };
-            ProfDAO.AddOrUpdateProfession(prof);
+            ItemDAO.AddOrUpdateEquipment(item);
         }
     }
 }

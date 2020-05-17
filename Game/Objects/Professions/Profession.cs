@@ -1,9 +1,9 @@
-﻿using Game.DAL.Interfaces;
+﻿using GameCore.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Professions
+namespace GameCore.Objects.Professions
 {
     public class Profession
     {

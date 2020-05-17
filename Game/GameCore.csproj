@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Objects\Effects\" />
     <Folder Include="Objects\Skills\" />
     <Folder Include="Scenario\Core\" />
   </ItemGroup>

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Actors.VitalsInterfaces
+namespace GameCore.Objects.Actors.VitalsInterfaces
 {
     public interface IHealth
     {
-        public int HP { get; set; }
+        public int MaxHP { get; set; }
         public int HPRegen { get; set; }
         public void AdjustBaseHP(int points);
     }
 
     public interface IStamina
     {
-        public int SP { get; set; }
+        public int MaxSP { get; set; }
         public int SPRegen { get; set; }
         public void AdjustBaseSP(int points);
     }

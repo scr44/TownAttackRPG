@@ -1,9 +1,9 @@
-﻿using Game.Objects.Items;
+﻿using GameCore.Objects.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Items.InventoryAndEquipment
+namespace GameCore.Objects.Items.InventoryAndEquipment
 {
     public interface IItemManagement
     {

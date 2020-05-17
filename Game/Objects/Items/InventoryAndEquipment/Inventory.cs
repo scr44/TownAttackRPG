@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Items.InventoryAndEquipment
+namespace GameCore.Objects.Items.InventoryAndEquipment
 {
     public class Inventory : IItemManagement
     {

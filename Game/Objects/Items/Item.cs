@@ -1,10 +1,10 @@
-﻿using Game.DAL.Interfaces;
-using Game.DAL.Mocks;
+﻿using GameCore.DAL.Interfaces;
+using GameCore.DAL.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Items
+namespace GameCore.Objects.Items
 {
     public class Item
     {
