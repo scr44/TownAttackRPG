@@ -1,5 +1,5 @@
-﻿using Game.DAL.Interfaces;
-using Game.Objects.Items;
+﻿using GameCore.DAL.Interfaces;
+using GameCore.Objects.Items;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Game.DAL.Json
+namespace GameCore.DAL.Json
 {
     public class JsonItemDAO : IItemDAO
     {

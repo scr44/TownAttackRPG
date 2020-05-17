@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Constants
+namespace GameCore.Constants
 {
     public static class ItemCatalog
     {
         public static class Consumables
         {
-            public static readonly string HealingElixerSmall = "Small Healing Elixir";
+            public const string HealingElixerSmall = "Small Healing Elixir";
         }
 
         public static class Misc
         {
-            public static readonly string Junk = "Junk";
+            public const string Junk = "Junk";
         }
     }
 
@@ -21,19 +21,19 @@ namespace Game.Constants
     {
         public static class Body
         {
-            public static readonly string Naked = "Naked";
-            public static readonly string FullPlate = "Full Plate Armor";
+            public const string Naked = "Naked";
+            public const string FullPlate = "Full Plate Armor";
         }
         public static class Hands
         {
-            public static readonly string BareHand = "Bare Hand";
-            public static readonly string TwoHanding = "Two-handing";
-            public static readonly string Longsword = "Longsword";
+            public const string BareHand = "Bare Hand";
+            public const string TwoHanding = "Two-handing";
+            public const string Longsword = "Longsword";
         }
         public static class Charms
         {
-            public static readonly string None = "None";
-            public static readonly string LoversLocket = "Lover's Locket";
+            public const string None = "None";
+            public const string LoversLocket = "Lover's Locket";
         }
     }
 }

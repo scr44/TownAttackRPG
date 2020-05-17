@@ -1,15 +1,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Game.Constants;
-using Game.Objects.Actors;
-using Game.Objects.Professions;
-using Game.DAL.Interfaces;
-using Game.DAL.Mocks;
-using Game.DAL.Json;
+using GameCore.Constants;
+using GameCore.Objects.Actors;
+using GameCore.Objects.Professions;
+using GameCore.DAL.Interfaces;
+using GameCore.DAL.Mocks;
+using GameCore.DAL.Json;
 
-namespace Fixtures
+namespace CharacterFixture
 {
     [TestClass]
-    public class CharacterCreationFixture
+    public class CharacterCreation
     {
         IProfessionDAO ProfessionDAO { get; set; } = new JsonProfessionDAO();
         Character Guinevere { get; set; }
@@ -65,8 +65,8 @@ namespace Fixtures
             CollectionAssert.AreEqual(Knight.StartingTalents, Guinevere.BaseTalents.Base);
             Assert.AreEqual(Knight.StartingVitals[Vitals.HP], Guinevere.HP);
             Assert.AreEqual(Knight.StartingVitals[Vitals.SP], Guinevere.SP);
-            Assert.AreEqual(Knight.StartingVitals[Vitals.HPRegen], Guinevere.BaseHealth.HPRegen);
-            Assert.AreEqual(Knight.StartingVitals[Vitals.SPRegen], Guinevere.BaseStamina.SPRegen);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.HPRegen], Guinevere.Health.HPRegen);
+            Assert.AreEqual(Knight.StartingVitals[Vitals.SPRegen], Guinevere.Stamina.SPRegen);
         }
         
         [TestMethod]

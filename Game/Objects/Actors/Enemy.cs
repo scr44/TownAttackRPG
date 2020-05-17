@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Actors
+namespace GameCore.Objects.Actors
 {
     public class Enemy : Actor
     {
-        public Enemy(string name, string gender) : base(name, gender)
+        public Enemy(string name) : base(name)
         {
 
         }
-        public override double GetNetModifier(string stat)
+        public override double Modifier(string stat)
         {
             throw new NotImplementedException();
         }

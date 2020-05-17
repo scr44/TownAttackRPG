@@ -1,28 +1,28 @@
-﻿using Game.Objects.Actors.VitalsInterfaces;
+﻿using GameCore.Objects.Actors.VitalsInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Actors.VitalsClasses
+namespace GameCore.Objects.Actors.VitalsClasses
 {
     public class Health : IHealth
     {
         public Health() { }
-        public int HP { get; set; }
+        public int MaxHP { get; set; }
         public int HPRegen { get; set; }
         public void AdjustBaseHP(int points)
         {
-            HP += points;
+            MaxHP += points;
         }
     }
 
     public class Stamina : IStamina
     {
-        public int SP { get; set; }
+        public int MaxSP { get; set; }
         public int SPRegen { get; set; }
         public void AdjustBaseSP(int points)
         {
-            SP += points;
+            MaxSP += points;
         }
     }
 }

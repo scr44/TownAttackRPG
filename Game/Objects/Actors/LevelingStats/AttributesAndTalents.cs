@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Game.Objects.Actors
+namespace GameCore.Objects.Actors
 {
     public class Attributes
     {
@@ -10,22 +10,22 @@ namespace Game.Objects.Actors
         public int AttributePoints { get; private set; } = 0;
         private void AdjustAttribute(string stat, int points)
         {
-            try
+            if (Base.ContainsKey(stat))
             {
                 Base[stat] += points;
             }
-            catch (KeyNotFoundException)
+            else
             {
                 throw new KeyNotFoundException("Invalid Attribute, cannot adjust.");
             }
         }
         private void SetAttribute(string stat, int points)
         {
-            try
+            if (Base.ContainsKey(stat))
             {
                 Base[stat] = points;
             }
-            catch (KeyNotFoundException)
+            else
             {
                 throw new KeyNotFoundException("Invalid Attribute, cannot set.");
             }
@@ -50,22 +50,22 @@ namespace Game.Objects.Actors
         public int TalentPoints { get; set; } = 0;
         private void AdjustTalent(string stat, int points)
         {
-            try
+            if (Base.ContainsKey(stat))
             {
                 Base[stat] += points;
             }
-            catch (KeyNotFoundException)
+            else
             {
                 throw new KeyNotFoundException("Invalid Talent, cannot adjust.");
             }
         }
         private void SetTalent(string stat, int points)
         {
-            try
+            if (Base.ContainsKey(stat))
             {
                 Base[stat] = points;
             }
-            catch (KeyNotFoundException)
+            else
             {
                 throw new KeyNotFoundException("Invalid Talent, cannot set.");
             }

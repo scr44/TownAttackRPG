@@ -1,25 +1,30 @@
-﻿using Game.Constants;
-using Game.DAL.Interfaces;
-using Game.DAL.Mocks;
-using Game.Objects.Items;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using GameCore.Constants;
+using GameCore.DAL.Interfaces;
+using GameCore.DAL.Json;
+using GameCore.Objects.Items;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Fixtures
+namespace ItemFixture
 {
     [TestClass]
-    public class ItemFixture
+    public class Equipment
     {
-        IItemDAO ItemDAO { get; set; } = new MockItemDAO();
+        IItemDAO ItemDAO = new JsonItemDAO();
+        EquipmentItem Longsword;
 
         [TestInitialize]
-        public void Create_items()
+        public void Generate_equipment()
         {
+            Longsword = ItemDAO.GetEquipment(EquipmentCatalog.Hands.Longsword);
         }
 
         [TestMethod]
-        public void Item_has_correct_description_properties()
+        public void Retrieves_correct_item()
         {
-            
+            Assert.AreEqual(EquipmentCatalog.Hands.Longsword, Longsword.id);
         }
     }
 }

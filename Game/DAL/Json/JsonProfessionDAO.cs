@@ -1,5 +1,5 @@
-﻿using Game.DAL.Interfaces;
-using Game.Objects.Professions;
+﻿using GameCore.DAL.Interfaces;
+using GameCore.Objects.Professions;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Linq;
 
-namespace Game.DAL.Json
+namespace GameCore.DAL.Json
 {
     public class JsonProfessionDAO : IProfessionDAO
     {
