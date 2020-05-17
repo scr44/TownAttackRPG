@@ -15,10 +15,10 @@ namespace GameCore.DAL.Json
         List<Item> itemCatalog => GetItemCatalog();
         List<EquipmentItem> equipmentCatalog => GetEquipmentCatalog();
 
-        public Item GetItem(string id)
+        public Item GenerateNewItem(string id)
         {
             var searchResults = (from i in itemCatalog
-                                 where i.id == id
+                                 where i.IdName == id
                                  select i).ToList();
             if (searchResults.Count == 0)
             {
@@ -29,10 +29,10 @@ namespace GameCore.DAL.Json
                 return searchResults[0];
             }
         }
-        public EquipmentItem GetEquipment(string id)
+        public EquipmentItem GenerateNewEquipmentItem(string id)
         {
             var searchResults = (from e in equipmentCatalog
-                                 where e.id == id
+                                 where e.IdName == id
                                  select e).ToList();
             if (searchResults.Count == 0)
             {
@@ -48,13 +48,13 @@ namespace GameCore.DAL.Json
             var updatedCatalog = GetItemCatalog();
             foreach (var item in updatedCatalog.ToList())
             {
-                if (item.id == newItem.id)
+                if (item.IdName == newItem.IdName)
                 {
                     updatedCatalog.Remove(item);
                 }
             }
             updatedCatalog.Add(newItem);
-            updatedCatalog.Sort((x, y) => string.Compare(x.id, y.id));
+            updatedCatalog.Sort((x, y) => string.Compare(x.IdName, y.IdName));
             File.WriteAllText(jsonLibraryPath + "/items.json",
                 JsonConvert.SerializeObject(updatedCatalog,Formatting.Indented));
         }
@@ -63,13 +63,13 @@ namespace GameCore.DAL.Json
             var updatedCatalog = GetEquipmentCatalog();
             foreach (var item in updatedCatalog.ToList())
             {
-                if (item.id == newEquipment.id)
+                if (item.IdName == newEquipment.IdName)
                 {
                     updatedCatalog.Remove(item);
                 }
             }
             updatedCatalog.Add(newEquipment);
-            updatedCatalog.Sort((x, y) => string.Compare(x.id, y.id));
+            updatedCatalog.Sort((x, y) => string.Compare(x.IdName, y.IdName));
             File.WriteAllText(jsonLibraryPath + "/equipment.json",
                 JsonConvert.SerializeObject(updatedCatalog,Formatting.Indented));
         }
@@ -90,6 +90,11 @@ namespace GameCore.DAL.Json
                 string jsonData = sr.ReadToEnd();
                 return JsonConvert.DeserializeObject<List<EquipmentItem>>(jsonData);
             }
+        }
+
+        public void SaveItemToDB(Item item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

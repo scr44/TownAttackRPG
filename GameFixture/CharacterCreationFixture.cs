@@ -84,7 +84,7 @@ namespace CharacterFixture
         {
             foreach (var kvp in Guinevere.EquipmentSlots)
             {
-                Assert.AreEqual(Knight.StartingEquipment[kvp.Key], Guinevere.EquipmentSlots[kvp.Key].Name);
+                Assert.AreEqual(Knight.StartingEquipment[kvp.Key], Guinevere.EquipmentSlots[kvp.Key].DisplayName);
             }
         }
 
@@ -95,11 +95,5 @@ namespace CharacterFixture
             Assert.AreEqual(Guinevere.MaxSP, Guinevere.SP);
         }
 
-        [TestMethod]
-        public void Character_vitals_are_maxed()
-        {
-            Assert.AreEqual(Guinevere.MaxHP, Guinevere.HP);
-            Assert.AreEqual(Guinevere.MaxSP, Guinevere.SP);
-        }
     }
 }

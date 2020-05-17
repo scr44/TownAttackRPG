@@ -14,9 +14,9 @@ namespace GameCore.Objects.Items.InventoryAndEquipment
                 var counts = new Dictionary<string, int>();
                 foreach (var item in Items)
                 {
-                    if(!counts.TryAdd(item.Name, 1))
+                    if(!counts.TryAdd(item.DisplayName, 1))
                     {
-                        counts[item.Name]++;
+                        counts[item.DisplayName]++;
                     }
                 }
                 return counts;

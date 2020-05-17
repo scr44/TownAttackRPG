@@ -148,8 +148,6 @@ namespace GameCore.Objects.Actors
             }
         }
 
-        public Inventory Inventory { get; protected set; } = new Inventory();
-
         // TODO: Skillbar
         // TODO: RewardDrops (XP, Loot)
 

@@ -18,13 +18,13 @@ namespace ItemFixture
         [TestInitialize]
         public void Generate_equipment()
         {
-            Longsword = ItemDAO.GetEquipment(EquipmentCatalog.Hands.Longsword);
+            Longsword = ItemDAO.GenerateNewEquipmentItem(EquipmentCatalog.Hands.Longsword);
         }
 
         [TestMethod]
         public void Retrieves_correct_item()
         {
-            Assert.AreEqual(EquipmentCatalog.Hands.Longsword, Longsword.id);
+            Assert.AreEqual(EquipmentCatalog.Hands.Longsword, Longsword.IdName);
         }
     }
 }

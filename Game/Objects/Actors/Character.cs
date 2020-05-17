@@ -1,16 +1,11 @@
-using GameCore.Constants;
-using GameCore.Objects.Items;
-using GameCore.Objects.Professions;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using GameCore.Objects.Items.InventoryAndEquipment;
+using GameCore.Constants;
 using GameCore.DAL.Interfaces;
-using GameCore.DAL.Mocks;
-using GameCore.Objects.Actors.VitalsClasses;
 using GameCore.DAL.Json;
-using GameCore.Objects.Effects;
+using GameCore.Objects.Actors.VitalsClasses;
+using GameCore.Objects.Items;
+using GameCore.Objects.Items.InventoryAndEquipment;
+using GameCore.Objects.Professions;
 
 namespace GameCore.Objects.Actors
 {
@@ -42,17 +37,17 @@ namespace GameCore.Objects.Actors
             };
             EquipmentSlots = new Dictionary<string, EquipmentItem>()
             {
-                { Slot.Body, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.Body]) },
-                { Slot.MainHand, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.MainHand]) },
-                { Slot.OffHand, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.OffHand]) },
-                { Slot.Charm1, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.Charm1]) },
-                { Slot.Charm2, ItemDAO.GetEquipment(Profession.StartingEquipment[Slot.Charm2]) }
+                { Slot.Body, ItemDAO.GenerateNewEquipmentItem(Profession.StartingEquipment[Slot.Body]) },
+                { Slot.MainHand, ItemDAO.GenerateNewEquipmentItem(Profession.StartingEquipment[Slot.MainHand]) },
+                { Slot.OffHand, ItemDAO.GenerateNewEquipmentItem(Profession.StartingEquipment[Slot.OffHand]) },
+                { Slot.Charm1, ItemDAO.GenerateNewEquipmentItem(Profession.StartingEquipment[Slot.Charm1]) },
+                { Slot.Charm2, ItemDAO.GenerateNewEquipmentItem(Profession.StartingEquipment[Slot.Charm2]) }
             };
             foreach (var kvp in Profession.StartingInventory)
             {
                 for (int i = 0; i < kvp.Value; i++)
                 {
-                    Inventory.AddItem(ItemDAO.GetItem(kvp.Key));
+                    Inventory.AddItem(ItemDAO.GenerateNewItem(kvp.Key));
                 }
             }
             // Fill vitals to max after equipment bonuses are set
@@ -90,7 +85,7 @@ namespace GameCore.Objects.Actors
         }
 
         public Dictionary<string, EquipmentItem> EquipmentSlots { get; private set; }
-        bool IsTwoHanding => EquipmentSlots[Slot.OffHand].Name == EquipmentCatalog.Hands.TwoHanding;
+        bool IsTwoHanding => EquipmentSlots[Slot.OffHand].DisplayName == EquipmentCatalog.Hands.TwoHanding;
         public void Equip(string slot, EquipmentItem item)
         {
             bool isCharm = item.ValidSlots.Contains(Slot.Charm);
@@ -98,11 +93,11 @@ namespace GameCore.Objects.Actors
             bool willDualWield = false;
             if (slot == Slot.MainHand)
             {
-                willDualWield = item.Name == EquipmentSlots[Slot.OffHand].Name;
+                willDualWield = item.DisplayName == EquipmentSlots[Slot.OffHand].DisplayName;
             }
             else if (slot == Slot.OffHand)
             {
-                willDualWield = item.Name == EquipmentSlots[Slot.MainHand].Name;
+                willDualWield = item.DisplayName == EquipmentSlots[Slot.MainHand].DisplayName;
             }
             bool mainHandRequiresTwoHanding = EquipmentSlots[Slot.MainHand].Tags.Contains(Tags.Restrictions.MustTwoHand);
             bool cannotDualWield = item.Tags.Contains(Tags.Restrictions.CannotDualWield);
@@ -152,20 +147,20 @@ namespace GameCore.Objects.Actors
             {
                 case Slot.MainHand:
                 case Slot.OffHand:
-                    EquipmentSlots[slot] = ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand);
-                    if (EquipmentSlots[Slot.OffHand].id == EquipmentCatalog.Hands.TwoHanding)
+                    EquipmentSlots[slot] = ItemDAO.GenerateNewEquipmentItem(EquipmentCatalog.Hands.BareHand);
+                    if (EquipmentSlots[Slot.OffHand].IdName == EquipmentCatalog.Hands.TwoHanding)
                     {
-                        EquipmentSlots[Slot.OffHand] = ItemDAO.GetEquipment(EquipmentCatalog.Hands.BareHand);
+                        EquipmentSlots[Slot.OffHand] = ItemDAO.GenerateNewEquipmentItem(EquipmentCatalog.Hands.BareHand);
                     }
                     break;
 
                 case Slot.Body:
-                    EquipmentSlots[slot] = ItemDAO.GetEquipment(EquipmentCatalog.Body.Naked);
+                    EquipmentSlots[slot] = ItemDAO.GenerateNewEquipmentItem(EquipmentCatalog.Body.Naked);
                     break;
 
                 case Slot.Charm1:
                 case Slot.Charm2:
-                    EquipmentSlots[slot] = ItemDAO.GetEquipment(EquipmentCatalog.Charms.None);
+                    EquipmentSlots[slot] = ItemDAO.GenerateNewEquipmentItem(EquipmentCatalog.Charms.None);
                     break;
             }
 
@@ -197,7 +192,7 @@ namespace GameCore.Objects.Actors
                     throw new CannotTwoHandException();
                 }
                 Unequip(Slot.OffHand);
-                EquipmentSlots[Slot.OffHand] = ItemDAO.GetEquipment(EquipmentCatalog.Hands.TwoHanding);
+                EquipmentSlots[Slot.OffHand] = ItemDAO.GenerateNewEquipmentItem(EquipmentCatalog.Hands.TwoHanding);
             }
         }
 
@@ -219,7 +214,7 @@ namespace GameCore.Objects.Actors
                     {
                         modifier *= defMod;
                     }
-                    if (equipment.CharmMod.TryGetValue(stat, out double charmMod))
+                    if (equipment.BonusStatMod.TryGetValue(stat, out double charmMod))
                     {
                         modifier *= charmMod;
                     }
@@ -245,7 +240,7 @@ namespace GameCore.Objects.Actors
                     {
                         modifier += defMod;
                     }
-                    if (equipment.CharmMod.TryGetValue(stat, out double charmMod))
+                    if (equipment.BonusStatMod.TryGetValue(stat, out double charmMod))
                     {
                         modifier += charmMod;
                     }

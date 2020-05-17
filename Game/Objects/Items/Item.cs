@@ -1,18 +1,14 @@
-﻿using GameCore.DAL.Interfaces;
-using GameCore.DAL.Mocks;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace GameCore.Objects.Items
 {
     public class Item
     {
-        public string id { get; set; }
-        public string Name { get; set; }
+        public string IdName { get; set; }
+        public string DisplayName { get; set; }
         public string Description { get; set; }
         public int Value { get; set; }
         public double Weight { get; set; }
-        public List<string> Tags { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();
     }
 }

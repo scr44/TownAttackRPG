@@ -8,12 +8,12 @@ namespace GameCore.Constants
     {
         public static class Consumables
         {
-            public const string HealingElixerSmall = "Small Healing Elixir";
+            public const string HealingElixerSmall = "small_healing_elixir";
         }
 
         public static class Misc
         {
-            public const string Junk = "Junk";
+            public const string Junk = "junk";
         }
     }
 
@@ -21,19 +21,19 @@ namespace GameCore.Constants
     {
         public static class Body
         {
-            public const string Naked = "Naked";
-            public const string FullPlate = "Full Plate Armor";
+            public const string Naked = "naked";
+            public const string FullPlate = "full_plate_knight";
         }
         public static class Hands
         {
-            public const string BareHand = "Bare Hand";
-            public const string TwoHanding = "Two-handing";
-            public const string Longsword = "Longsword";
+            public const string BareHand = "bare_hand";
+            public const string TwoHanding = "two_handing";
+            public const string Longsword = "longsword_basic";
         }
         public static class Charms
         {
-            public const string None = "None";
-            public const string LoversLocket = "Lover's Locket";
+            public const string None = "none";
+            public const string LoversLocket = "lovers_locket";
         }
     }
 }

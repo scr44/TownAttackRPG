@@ -7,8 +7,8 @@ namespace GameCore.DAL.Interfaces
 {
     public interface IItemDAO
     {
-        public Item GetItem(string id);
-        public EquipmentItem GetEquipment(string id);
+        public Item GenerateNewItem(string itemName);
+        public EquipmentItem GenerateNewEquipmentItem(string itemName);
     }
 
     public class InvalidItemException : Exception { }
