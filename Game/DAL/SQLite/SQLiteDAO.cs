@@ -5,11 +5,12 @@ using System.Linq;
 using GameCore.Constants;
 using GameCore.DAL.Interfaces;
 using GameCore.Objects.Items;
+using GameCore.Objects.Professions;
 using Newtonsoft.Json;
 
 namespace GameCore.DAL.SQLite
 {
-    public class SQLiteDAO : IItemDAO
+    public class SQLiteDAO : IItemDAO, IProfessionDAO
     {
         string _dataSource;
         string _connectionString;
@@ -52,6 +53,11 @@ namespace GameCore.DAL.SQLite
                 equipmentItem.Durability = equipmentItem.MaxDurability;
             }
             return equipmentItem;
+        }
+
+        public Profession GetProfession(string title)
+        {
+            throw new NotImplementedException();
         }
 
         private Item GetItemStats(string itemName, SQLiteConnection conn)
